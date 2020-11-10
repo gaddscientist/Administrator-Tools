@@ -26,25 +26,25 @@
           
           <ul>
             <li><img src="img/vcu_logo.png" alt="Capstone" id="logo" /></li>
-            <li><a href="index.html" class="current">Home</a></li>
+            <li><a href="index.html" >Home</a></li>
             <li><a href="#">Bidding</a></li>
             <li><a href="#">Budgeting</a></li>
-            <li><a href="reportWriter.html">Reports</a></li>
+            <li><a href="reportWriter.html" class="current">Reports</a></li>
           </ul>
         </nav>
-        <div class="header-content">
-          <h1>
-            VCU Engineering: 
-            <span
-              class="txt-type"
-              data-weight="3000"
-              data-words='["Computer Science", "Mechanical", "Electrical", "Biomedical", "Computer", "Chemical"]'
-            ></span>
-          </h1>
-          <p class="lead">
-            VCU Capstone Design Expo 2021
-          </p>
-        </div>
+        <div class="header-content"></div>
+        <div class="filter-select">
+            <p class="selection"> Report Selection Criterion: </p>
+            <input class="input" placeholder=" Category"> </input>  
+            <input class="input" placeholder=" Selection"> </input>
+        </div> 
+        <div>
+            <p class="selection"> Reporting Criterion: </p> 
+            <input class="input" placeholder=" Category"> </input>  
+            <input class="input-small" placeholder=" Position"> </input> 
+            <input class="input-small" placeholder=" Sort"> </input>
+        </div> <br/><br/>
+        <div data-role="tile" class="upload-tile" onclick="window.location.href='reportWriter.html'"> Create </div>
       </div>
     </header>
     <!-- Footer -->
@@ -57,9 +57,6 @@
 
     <!-- Typewrite js function -->
     <script src="js/typewriter.js">
-      function toReportWriter () {
-
-      }
     </script>
 </body>
 
