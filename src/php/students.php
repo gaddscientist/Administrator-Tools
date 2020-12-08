@@ -1,10 +1,9 @@
 <?php
-echo "<h1>Students first and last names</h1>";
 
 require_once('connection.php');
 
 // Show all students
-$stmt = $conn->prepare("SELECT Your_First_name, Your_Last_Name FROM students");
+$stmt = $conn->prepare("SELECT Your_First_Name, Your_Last_Name FROM students");
 $stmt->execute();
 
 echo "<table style='border: solid 1px black;'>";

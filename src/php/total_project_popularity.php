@@ -20,7 +20,7 @@ $col6->execute();
 $projects = array();
 
 echo "<table style='border: solid 1px black;'>";
-echo "<thead><tr><th>Project</th><th>Total Count</th></tr></thead>";
+echo "<thead><tr><th>Total Count</th><th>Project</th></tr></thead>";
 echo "<tbody>";
 
 // while ($row = $col1->fetch()) { //&& $row2 = $col2->fetch()) {
@@ -126,7 +126,7 @@ array_pop($projects);
 arsort($projects);
 foreach($projects as $num => $count) {
     // echo "Project Number " . $num . " Count " . $count . "\n";
-    echo "<tr><td>$num</td><td>$count</td></tr>";
+    echo "<tr><td>$count</td><td>$num</td></tr>";
 }
 
 echo "</tbody>";

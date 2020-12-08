@@ -4,8 +4,8 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $servername = "localhost";
-$username = "bryan";
-$password = "password";
+$username = "root";
+$password = "capstone330";
 $database = "projects";
 
 try {
