@@ -43,7 +43,8 @@
             <div id="criterion">
               <form action="/var/www/html/phpTest/projects.php" method="post">
                 <label class="selection" for="category"> Reporting Criterion:</label>
-                <input class="input" placeholder=" Category" name="category"> </input>  
+                <!-- <input class="input" placeholder=" Category" name="category"> </input>   -->
+                <select name="columns" id="columns"></select>
                 <input class="input-small" placeholder=" Position" name="position"> </input> 
                 <input class="input-small" placeholder=" Sort" name="sort"> </input>
               </form>
@@ -61,11 +62,8 @@
       </div>
     </footer>
 
-    <!-- Typewrite js function -->
-    <script src="js/typewriter.js"></script>
     <!-- Add column criteria function -->
     <script src="js/reportWriter.js"></script>
-
 </body>
 
 </html>
