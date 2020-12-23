@@ -1,4 +1,6 @@
 /.project
 /bin/
 /.gradle/
-/*.pem/
+*.pem/
+node_modules/
+package-lock.json
