@@ -1,6 +1,7 @@
   // function addColumn() {
   //   const div = document.createElement('div');
 
+
   //   // div.className = 'row';
 
   //   div.innerHTML = '
@@ -191,28 +192,48 @@ function getCriteria(e) {
       chosenCriteria.push(item.options[item.selectedIndex].getAttribute('criteria'));
     });
 
-    createReport('https://localhost.com/filter.html', chosenCriteria);
+    // const res = createReport('https://localhost.com:5000/filter.html', chosenCriteria);
+    // const res = createReport('/filter.html', chosenCriteria);
+    const res = sendPost('/filter.html', chosenCriteria);
+    e.preventDefault();
+
+    // Refreshes page after sending data
+    window.location.reload();
 }
+
+const sendPost = async (url, data) => {
+  try {
+    const response = await axios.post(url, data);
+    console.log(response.data);
+  } catch(e) {
+    console.log(e);
+  }
+};
 
 // Make POST request
-async function createReport(url, data) {
-  // Request settings
-  const config = {
-    method: 'POST',
-    headers: {
-      'Concent-type': 'text/javascript'
-    },
-    body: data
-  };
+// async function createReport(url, data) {
+//   // Request settings
+//   const config = {
+//     method: 'POST',
+//     headers: {
+//       // 'Content-type': 'text/javascript'
+//       'Content-type': 'text/plain'
+//     },
+//     // body: { "criteria": data }
+//     body: "BODYTEXT"
+//   };
+//   console.log(config.body);
 
-  try {
-    // Makes post request and returns it
-    const response = await fetch(url, config);
-    return data
-  } catch(e) {
-    return e;
-  }
-}
+//   try {
+//     // Makes post request and returns it
+//     console.log('HERE');
+//     const response = await fetch(url, config);
+//     console.log('Here2');
+//     return response
+//   } catch(e) {
+//     return e;
+//   }
+// }
 
 // Event listener for Add Column button to call addColumn()
 document.querySelector('.add-column').addEventListener('click', addColumn);

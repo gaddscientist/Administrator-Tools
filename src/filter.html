@@ -39,10 +39,11 @@
             <label class="selection" for="select-category"> Report Selection Criterion:</label>
             <input class="input" placeholder=" Category" name="select-category"> </input>  
             <input class="input" placeholder=" Selection" name="selection"> </input>
-          <!-- </form>f -->
+          <!-- </form> -->
         </div> 
         <div>
-          <form action="/filter.html" method="post">
+          <!-- <form action="/filter.html" method="post"> -->
+          <form>
             <label class="selection" for="category"> Reporting Criterion:</label>
             <ul id="criterion">
               <li>
@@ -51,7 +52,8 @@
                 <input class="input-small" placeholder=" Sort" name="sort"> </input>
               </li>
             </ul>
-            <input type="submit" class="button create-report" value="Create">
+            <!-- <input type="submit" class="button create-report" value="Create"> -->
+            <button class="button create-report">Create</button>
             <button class="button add-column"> Add Column </button>
           </form>
         </div>
@@ -66,6 +68,7 @@
       </div>
     </footer>
 
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Add column criteria function -->
     <script src="js/front_end/reportWriter.js"></script>
 </body>
