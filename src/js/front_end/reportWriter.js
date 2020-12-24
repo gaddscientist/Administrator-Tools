@@ -144,10 +144,11 @@ const columns = [
 
 let column_id = 0;
 
-  // Adds selection criteria to drop down menu
+// Adds selection criteria to drop down menu
 function populateDropDown(colID) {
     // Adds selections to drop down
     for(const column in demoColumns) {
+      // Creates option elements from given list of columns
       const dropdown = document.querySelector(`.column-${colID}`);
       const item = document.createElement('option');
       item.textContent = demoColumns[column];
@@ -175,7 +176,7 @@ function addColumn(e) {
 }
 
   // Creates an object to be sent to back end to query database
-function createReport(e) {
+function getCriteria(e) {
     // Create object
     const chosenCriteria = [];
     // All li's
@@ -189,16 +190,35 @@ function createReport(e) {
       // Adds chosen option to array of chosen criteria
       chosenCriteria.push(item.options[item.selectedIndex].getAttribute('criteria'));
     });
-    console.log(chosenCriteria);
-    
-    // Clear object for next query or reload page
-    e.preventDefault();
+
+    createReport('https://localhost.com/filter.html', chosenCriteria);
+}
+
+// Make POST request
+async function createReport(url, data) {
+  // Request settings
+  const config = {
+    method: 'POST',
+    headers: {
+      'Concent-type': 'text/javascript'
+    },
+    body: data
+  };
+
+  try {
+    // Makes post request and returns it
+    const response = await fetch(url, config);
+    return data
+  } catch(e) {
+    return e;
+  }
 }
 
 // Event listener for Add Column button to call addColumn()
 document.querySelector('.add-column').addEventListener('click', addColumn);
 
 // Event listener for create button to generate report
-document.querySelector('.create-report').addEventListener('click', createReport);
+document.querySelector('.create-report').addEventListener('click', getCriteria);
 
+// Populates initial drop down menu
 populateDropDown(column_id);

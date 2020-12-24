@@ -35,32 +35,27 @@
         </nav>
         <div class="header-content"></div>
         <div class="filter-select">
-          <form action="/var/www/html/phpTest/projects.php" method="post">
+          <!-- <form action="/" method="post"> -->
             <label class="selection" for="select-category"> Report Selection Criterion:</label>
             <input class="input" placeholder=" Category" name="select-category"> </input>  
             <input class="input" placeholder=" Selection" name="selection"> </input>
+          <!-- </form>f -->
         </div> 
         <div>
-            <!-- <div id="criterion"> -->
-            <div>
-              <form action="/var/www/html/phpTest/projects.php" method="post">
-                <label class="selection" for="category"> Reporting Criterion:</label>
-                <!-- <input class="input" placeholder=" Category" name="category"> </input>   -->
-                <ul id="criterion">
-                  <li>
-                    <select name="column" class="column-0"></select>
-                    <input class="input-small" placeholder=" Position" name="position"> </input> 
-                    <input class="input-small" placeholder=" Sort" name="sort"> </input>
-                  </li>
-                </ul>
-                <!-- <select name="columns" id="columns"></select>
+          <form action="/filter.html" method="post">
+            <label class="selection" for="category"> Reporting Criterion:</label>
+            <ul id="criterion">
+              <li>
+                <select name="column" class="column-0"></select>
                 <input class="input-small" placeholder=" Position" name="position"> </input> 
-                <input class="input-small" placeholder=" Sort" name="sort"> </input> -->
-              </form>
-            </div> 
+                <input class="input-small" placeholder=" Sort" name="sort"> </input>
+              </li>
+            </ul>
+            <input type="submit" class="button create-report" value="Create">
             <button class="button add-column"> Add Column </button>
-        </div> <br/><br/>
-        <button class="button create-report"> Create </button>
+          </form>
+        </div>
+        <br/><br/>
       </div>
     </header>
     <!-- Footer -->

@@ -1,19 +1,34 @@
-const http = require('http'); // Import Node.js core module
 const express = require('express');
 const path = require('path');
 const app = express();
 
-// src folder is two folders above server.js file
-const parent = path.join(__dirname, '..', '..')
-// Sets base directory so absolute paths aren't needed
-app.use(express.static(parent));
+// Parses data sent from front end
+app.use(express.urlencoded({ extended: false }));
 
+// ONLY LEFT IN AS AN EXAMPLE. index.html REQUEST HANDLED BY DEFAULT HANDLER
 // Handles route to index.html
-// NOTE** May want to add links to other html files
-// NOTE** Relative links still work fine
-app.get('/', function(req, res){
-    res.sendFile('index.html');
-}); 
+// app.get('/', function(req, res){
+//     res.sendFile('index.html');
+// });
+
+// Handles POST requests to built report
+app.post('/filter.html', function(req, res) {
+    // Gets chosen criteria into local variable
+    const columns = req.body.column;
+    // Prints criteria to console
+    columns.forEach(column => console.log(column));
+    // Redirects back to filter page
+    res.sendFile('filter.html', { root: rootDir });
+});
+
+// src folder is two folders above server.js file
+const rootDir = path.join(__dirname, '..', '..')
+
+// Default handler
+app.use(express.static(rootDir), function(req, res, next) {
+    // Moves to next middleware function if present
+    return next();
+});
 
 // Listen for any incoming requests
 app.listen(5000);
