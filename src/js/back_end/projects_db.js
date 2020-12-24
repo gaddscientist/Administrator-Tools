@@ -3,7 +3,7 @@
     host     : 'localhost',
     user     : 'root',
     password : 'capstone330',
-    database : 'capstone'
+    database : 'projects'
   });
 
 function query(cols) {
@@ -14,37 +14,9 @@ function query(cols) {
       return;
     }
     
-    // Create select string: 
-    /*const selectString = ''
-    cols.forEach(col = > {
-      selectString += col + ', '
-    });
-    selectString.splice(-2); // Gets rid of trailing comma and space
-
-    SELECT ?? ,[selectString]
-    */
-
-    // const cols = ['Project_Name', 'Instructor_1_Name'];
-    console.log('Cols: ' + cols);
-    executeQuery(cols);
+    const query = buildQueryString(cols);
+    executeQuery(query, cols);
     
-    // connection.query('SELECT `Project_Name` FROM `projects` WHERE `Project_Categories` = "Computer Science"', function(error, results, fields) {
-    // connection.query('SELECT ??, ?? FROM `projects` WHERE `Project_Categories` = "Computer Science"', cols, function(error, results, fields) {
-    //   // error will be an Error if one occured during the query
-    //   // results will contain the results of the query
-    //   // fields will contain information about the returned results field (if any)
-    //   if(error) {
-    //     console.log(error);
-    //   }
-    //   else {
-    //     resultSet = results;
-    //     console.log(resultSet);
-    //     // results.forEach(result => {
-    //     //   console.log(result.Instructor_1_Name, '\t\t', result.Project_Name)
-    //     // });
-    //   }
-    // });
-
     connection.end(function(err) {
       if(err) {
         console.log(err);
@@ -56,32 +28,41 @@ function query(cols) {
   });
 }
 
-function executeQuery(cols) {
-  // return new Promise((resolve, reject) => {
-    connection.query('SELECT ??, ?? FROM `projects` WHERE `Project_Categories` = "Computer Science"', cols, function(error, results, fields) {
-      // error will be an Error if one occured during the query
-      // results will contain the results of the query
-      // fields will contain information about the returned results field (if any)
-      if(error) {
-        console.log(error);
-        // reject(error);
-      }
-      else {
-        // console.log(results);
-        // console.log(resultSet);
-        results.forEach(result => {
-          // console.log(result.Instructor_1_Name, '\t\t', result.Project_Name)
-          console.log(result);
-        });
-        // resolve(results);
-      }
-    });
-  // });
+function buildQueryString(cols) {
+  let query = 'SELECT ';
+
+  // Adds one placeholder for each specified column
+  cols.forEach(col => {
+    query += '??, ';
+  });
+
+  // Removes trailing ', ' from last placeholder
+  query = query.slice(0, -2);
+
+  // Finishes query
+  query += ' FROM `projects` WHERE `Project_Categories` = "Computer Science"';
+
+  // Returns finished query
+  return query;
+
+}
+
+function executeQuery(query, cols) {
+  connection.query(query, cols, function(error, results, fields) {
+    // error will be an Error if one occured during the query
+    // results will contain the results of the query
+    // fields will contain information about the returned results field (if any)
+    if(error) {
+      console.log(error);
+    }
+    else {
+      results.forEach(result => {
+        // console.log(result.Instructor_1_Name, '\t\t', result.Project_Name)
+        console.log(result);
+      });
+    }
+  });
 } 
 
 
 module.exports = { query };
-
-
-
-// Restructure code back into Promise/async
