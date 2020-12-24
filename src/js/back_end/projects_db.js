@@ -1,4 +1,6 @@
   const mysql      = require('mysql');
+
+  // Connection details
   const connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
@@ -6,28 +8,26 @@
     database : 'projects'
   });
 
-function query(cols) {
-
-  const select = connection.connect(function(err, columns) {
+  // Connect to database
+  connection.connect(function(err, columns) {
     if(err) {
       console.error('error connecting: ' + err.stack);
       return;
     }
-    
-    const query = buildQueryString(cols);
-    executeQuery(query, cols);
-    
-    connection.end(function(err) {
-      if(err) {
-        console.log(err);
-      }
-      else {
-        console.log('Connection closed...');
-      }
-    });
   });
+
+// External function to be called from server.js
+function query(cols) {
+
+  // Creates query string
+  const query = buildQueryString(cols);
+
+  // Executes query string
+  executeQuery(query, cols);
+
 }
 
+// Creates SQL query statement to be executed
 function buildQueryString(cols) {
   let query = 'SELECT ';
 
@@ -47,6 +47,7 @@ function buildQueryString(cols) {
 
 }
 
+// Queries database with user chosen selections
 function executeQuery(query, cols) {
   connection.query(query, cols, function(error, results, fields) {
     // error will be an Error if one occured during the query
@@ -63,6 +64,20 @@ function executeQuery(query, cols) {
     }
   });
 } 
+
+// Handler to shut down database on interrupt
+process.on( 'SIGINT', function() {
+    console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+    console.log('Closing database connection...');
+
+    connection.end(function(err) {
+      if(err) {
+        console.log(err);
+      }
+    });
+
+    process.exit( );
+  });
 
 
 module.exports = { query };

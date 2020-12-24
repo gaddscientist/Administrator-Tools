@@ -23,7 +23,8 @@ app.post('/filter.html', function(req, res) {
     // columns.forEach(column => console.log(column));
 
 
-    const a = db.query(columns);
+    // Queries database with selected columns
+    db.query(columns);
 });
 
 // src folder is two folders above server.js file
@@ -34,6 +35,12 @@ app.use(express.static(rootDir), function(req, res, next) {
     // Moves to next middleware function if present
     return next();
 });
+
+process.on( 'SIGINT', function() {
+    console.log( "\nGracefully shutting down from SIGINT (Ctrl-C)" );
+    // some other closing procedures go here
+    process.exit( );
+  });
 
 // Listen for any incoming requests
 app.listen(5000);
