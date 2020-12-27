@@ -192,17 +192,20 @@ function getCriteria(e) {
       chosenCriteria.push(item.options[item.selectedIndex].getAttribute('criteria'));
     });
 
-    const res = sendPost('/filter.html', chosenCriteria);
+    sendPost('/filter.html', chosenCriteria);
 
     e.preventDefault();
 
     // Refreshes page after sending data
-    window.location.reload();
+    // window.location.reload();
 }
 
 const sendPost = async (url, data) => {
   try {
     const response = await axios.post(url, data);
+    // const rows = Array.from(response.data);
+    // rows.forEach(row => console.log(row));
+    console.log(response.data);
   } catch(e) {
     console.log(e);
   }

@@ -15,16 +15,19 @@ app.use(express.json());
 // });
 
 // Handles POST requests to built report
-app.post('/filter.html', function(req, res) {
+app.post('/filter.html', async function(req, res) {
     // Gets chosen criteria into local variable
     const columns = Array.from(req.body);
 
-    // Prints criteria to console
-    // columns.forEach(column => console.log(column));
-
-
     // Queries database with selected columns
-    db.query(columns);
+    const rows = await db.query(columns);
+
+    // Logs to terminal
+    console.log(rows);
+
+    // returns query result
+    res.json(rows);
+
 });
 
 // src folder is two folders above server.js file

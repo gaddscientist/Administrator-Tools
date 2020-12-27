@@ -17,13 +17,15 @@
   });
 
 // External function to be called from server.js
-function query(cols) {
+async function query(cols) {
 
   // Creates query string
   const query = buildQueryString(cols);
 
   // Executes query string
-  executeQuery(query, cols);
+  const queryArr = await executeQuery(query, cols);
+
+  return queryArr;
 
 }
 
@@ -48,22 +50,18 @@ function buildQueryString(cols) {
 }
 
 // Queries database with user chosen selections
-function executeQuery(query, cols) {
-  connection.query(query, cols, function(error, results, fields) {
-    // error will be an Error if one occured during the query
-    // results will contain the results of the query
-    // fields will contain information about the returned results field (if any)
-    if(error) {
-      console.log(error);
-    }
-    else {
-      results.forEach(result => {
-        // console.log(result.Instructor_1_Name, '\t\t', result.Project_Name)
-        console.log(result);
-      });
-    }
-  });
-} 
+const executeQuery = (query, cols) => {
+  return new Promise((resolve, reject) => {
+    const a = connection.query(query, cols, function(error, results, fields) {
+      if(error) {
+        reject(error);
+      }
+      else {
+        resolve(results);
+      }
+    });
+  })
+}
 
 // Handler to shut down database on interrupt
 process.on( 'SIGINT', function() {
