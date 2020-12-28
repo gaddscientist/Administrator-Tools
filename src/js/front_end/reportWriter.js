@@ -160,7 +160,7 @@ function populateDropDown(colID) {
     }
 }
 
-  // Creates a new column to specify criteria
+// Creates a new column to specify criteria
 function addColumn(e) {
   column_id++;
   
@@ -171,6 +171,15 @@ function addColumn(e) {
   `;
   document.getElementById('criterion').appendChild(li);
   populateDropDown(column_id);
+
+  e.preventDefault();
+}
+
+// Removes bottom column
+function delColumn(e) {
+  column_id--;
+  
+  document.getElementById('criterion').removeChild(document.getElementById('criterion').lastChild);
 
   e.preventDefault();
 }
@@ -224,6 +233,8 @@ const sendPost = async (url, data) => {
 
 // Event listener for Add Column button to call addColumn()
 document.querySelector('.add-column').addEventListener('click', addColumn);
+// Event listener for Delete Column button to call delColumn()
+document.querySelector('.del-column').addEventListener('click', delColumn);
 
 // Event listener for create button to generate report
 document.querySelector('.create-report').addEventListener('click', getCriteria);
