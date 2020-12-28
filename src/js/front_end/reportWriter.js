@@ -144,6 +144,7 @@ const columns = [
 ];
 
 let column_id = 0;
+let sortOrder = 'ascending';
 
 // Adds selection criteria to drop down menu
 function populateDropDown(colID) {
@@ -190,6 +191,11 @@ function getCriteria(e) {
       chosenCriteria.push(item.options[item.selectedIndex].getAttribute('criteria'));
     });
 
+    // Reverses array if sort is set to descending
+    if(document.getElementById('sort').value === 'descending') {
+      sortOrder = 'descending';
+    }
+
     sendPost('/filter.html', chosenCriteria);
 
     e.preventDefault();
@@ -203,7 +209,14 @@ const sendPost = async (url, data) => {
     const response = await axios.post(url, data);
     // const rows = Array.from(response.data);
     // rows.forEach(row => console.log(row));
-    console.log(response.data);
+    if(sortOrder === 'ascending') {
+      console.log(response.data);
+    }
+    else {
+      console.log(response.data.reverse());
+      document.getElementById('sort').value = 'ascending';
+      sortOrder = 'ascending';
+    }
   } catch(e) {
     console.log(e);
   }
