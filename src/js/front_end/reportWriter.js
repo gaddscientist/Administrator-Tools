@@ -167,8 +167,6 @@ function addColumn(e) {
 
   li.innerHTML = `
     <select name="column" class="column-${column_id}"></select>
-    <input class="input-small" placeholder=" Position"> </input> 
-    <input class="input-small" placeholder=" Sort"> </input>
   `;
   document.getElementById('criterion').appendChild(li);
   populateDropDown(column_id);

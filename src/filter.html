@@ -24,7 +24,6 @@
     <header id="header-reportWriter">
       <div class="container">
         <nav id="main-nav">
-          
           <ul>
             <li><img src="img/vcu_logo.png" alt="Capstone" id="logo" /></li>
             <li><a href="index.html" >Home</a></li>
@@ -33,33 +32,38 @@
             <li><a href="reportWriter.html" class="current">Reports</a></li>
           </ul>
         </nav>
-        <div class="header-content"></div>
-        <div class="filter-select">
-          <!-- <form action="/" method="post"> -->
-            <label class="selection" for="select-category"> Report Selection Criterion:</label>
-            <input class="input" placeholder=" Category" name="select-category"> </input>  
-            <input class="input" placeholder=" Selection" name="selection"> </input>
-          <!-- </form> -->
-        </div> 
-        <div>
-          <!-- <form action="/filter.html" method="post"> -->
-          <form>
-            <label class="selection" for="category"> Reporting Criterion:</label>
-            <ul id="criterion">
-              <li>
-                <select name="column" class="column-0"></select>
-                <input class="input-small" placeholder=" Position" name="position"> </input> 
-                <input class="input-small" placeholder=" Sort" name="sort"> </input>
-              </li>
-            </ul>
-            <!-- <input type="submit" class="button create-report" value="Create"> -->
-            <button class="button create-report">Create</button>
-            <button class="button add-column"> Add Column </button>
-          </form>
-        </div>
-        <br/><br/>
       </div>
     </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="filter-select">
+        <form>
+          <label class="selection" for="select-category"> Report Selection Criterion:</label>
+          <input class="input" placeholder=" Category" name="select-category"> </input>  
+          <input class="input" placeholder=" Selection" name="selection"> </input>
+        </form>
+      </div> 
+      <div>
+        <form>
+          <button class="button create-report">Create</button>
+          <button class="button add-column"> Add Column </button>
+          <label class="selection" for="category"> Reporting Criterion:</label>
+
+          <select name="sort" id="sort">
+            <option value="ascending">Ascending</option>
+            <option value="decending">Descending</option>
+          </select>
+          <ul id="criterion">
+            <li>
+              <select name="column" class="column-0"></select>
+            </li>
+          </ul>
+        </form>
+      </div>
+      <br/><br/>
+    </div>
+
     <!-- Footer -->
     <footer id="main-footer">
       <div class="footer-content container">
