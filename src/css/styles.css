@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 .title {
   font-size: 3rem;
   text-align: center;
@@ -11,8 +16,7 @@
   text-align: center;
   width: 12rem;
   margin-bottom: 0.5rem;
-  /* padding: 0.5rem; */
-  /* float: right; */
+  border-radius: 25px;
 }
 
 .filter {
@@ -29,6 +33,10 @@
   width: 25rem;
   font-size: 2rem;
   /* margin: 0em; */
+}
+
+.create-report {
+  margin-left: 3rem;
 }
 
 .filter-select {
@@ -53,6 +61,12 @@ input[type="file"]::-webkit-file-upload-button {
   padding: 0.8em 0.8em;
   background-color: #ffbc00;
   float: right;
+}
+
+.dropdown-title {
+  margin-bottom: 0;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
 #fileUpload {

@@ -1,18 +1,28 @@
 columns = {
-  'Project_Number': 'Project Number',
-  'Project_Name': 'Project Name',
-  'Client_Name': 'Client Name',
-  'Instructor_1_Name': 'Instructor Name',
-  'Instructor_1_Email': 'Instructor Email',
-  'Student_1_Name': 'First Student - Name',
-  'Student_1_Email': 'First Student - Email',
-  'Student_2_Name': 'Second Student - Name',
-  'Student_2_Email': 'Second Student - Name',
-  'Student_3_Name': 'Third Student - Name',
-  'Student_3_Email': 'Third Student - Name',
-  'Student_4_Name': 'Fourth Student - Name',
-  'Student_4_Email': 'Fourth Student - Name'
+  Project_Number: "Project Number",
+  Project_Name: "Project Name",
+  Client_Name: "Client Name",
+  Instructor_1_Name: "Instructor Name",
+  Instructor_1_Email: "Instructor Email",
+  Student_1_Name: "First Student - Name",
+  Student_1_Email: "First Student - Email",
+  Student_2_Name: "Second Student - Name",
+  Student_2_Email: "Second Student - Name",
+  Student_3_Name: "Third Student - Name",
+  Student_3_Email: "Third Student - Name",
+  Student_4_Name: "Fourth Student - Name",
+  Student_4_Email: "Fourth Student - Name",
 };
+
+disciplines = [
+  "All Majors",
+  "Biomedical",
+  "Chemical",
+  "Computer Science",
+  "Computer",
+  "Electrical",
+  "Mechanical",
+];
 
 // const columns = [
 //   'Project_Number',
@@ -129,109 +139,143 @@ columns = {
 // ];
 
 let column_id = 0;
-let sortOrder = 'ascending';
+let sortOrder = "ascending";
 
 // Adds selection criteria to drop down menu
-function populateDropDown(colID) {
-    // Adds selections to drop down
-    for(const column in columns) {
-      // Creates option elements from given list of columns
-      const dropdown = document.querySelector(`.column-${colID}`);
-      const item = document.createElement('option');
-      item.textContent = columns[column];
-      item.value = columns[column];
-      item.setAttribute('criteria', column);
-      dropdown.appendChild(item);
-    }
+function populateCriteriaDropDown(colID) {
+  // Adds selections to columns drop down
+  for (const column in columns) {
+    // Creates option elements from given list of columns
+    const dropdown = document.querySelector(`.column-${colID}`);
+    const item = document.createElement("option");
+    item.textContent = columns[column];
+    item.value = columns[column];
+    item.setAttribute("criteria", column);
+    dropdown.appendChild(item);
+  }
+}
+
+function populateDisciplineDropDown() {
+  // Adds selections to disciplines drop down
+  for (const discipline in disciplines) {
+    // Creates option elements from given list of majors
+    const dropdown = document.getElementById("disciplines");
+    const item = document.createElement("option");
+    item.textContent = disciplines[discipline];
+    item.value = disciplines[discipline];
+    item.setAttribute("major", disciplines[discipline]);
+    dropdown.appendChild(item);
+  }
+}
+
+function populateDropDowns(colID) {
+  populateCriteriaDropDown(colID);
+  populateDisciplineDropDown();
 }
 
 // Creates a new column to specify criteria
 function addColumn(e) {
   const numCols = Object.keys(columns).length - 1;
-  if(column_id < numCols) {
-
+  if (column_id < numCols) {
     column_id++;
-    
-    const li = document.createElement('li');
+
+    const li = document.createElement("li");
 
     li.innerHTML = `
       <select name="column" class="column-${column_id}"></select>
     `;
-    document.getElementById('criterion').appendChild(li);
-    populateDropDown(column_id);
-  }
-  else {
-    alert('Can not select more columns than exist in database');
+    document.getElementById("criterion").appendChild(li);
+    populateCriteriaDropDown(column_id);
+  } else {
+    alert("Can not select more columns than exist in database");
   }
   e.preventDefault();
 }
 
 // Removes bottom column
 function delColumn(e) {
-  if(column_id > 0) {
+  if (column_id > 0) {
     column_id--;
-    document.getElementById('criterion').removeChild(document.getElementById('criterion').lastChild);
-  }
-  else {
-    alert('Can not remove last item');
+    document
+      .getElementById("criterion")
+      .removeChild(document.getElementById("criterion").lastChild);
+  } else {
+    alert("Can not remove last item");
   }
 
   e.preventDefault();
 }
 
-  // Creates an object to be sent to back end to query database
-function getCriteria(e) {
-    // Create object
-    const chosenCriteria = [];
-    // All li's
-    const selections = document.querySelector('#criterion');
-    // li's as an array
-    selectionArr = Array.from(selections.children);
-    // Iterate over each li
-    selectionArr.forEach(li => {
-      // Each "selection" element within the li
-      const item = li.children[0];
-      // Adds chosen option to array of chosen criteria
-      chosenCriteria.push(item.options[item.selectedIndex].getAttribute('criteria'));
-    });
+// Creates an object to be sent to back end to query database
+function getCriteria() {
+  // Create object
+  const chosenCriteria = {
+    columns: [],
+    major: "",
+  };
 
-    // Reverses array if sort is set to descending
-    if(document.getElementById('sort').value === 'descending') {
-      sortOrder = 'descending';
-    }
+  // Gets all desired columns
+  const cols = document.querySelector("#criterion");
+  // li's as an array
+  selectionArr = Array.from(cols.children);
+  // Iterate over each li
+  selectionArr.forEach((li) => {
+    // Each "selection" element within the li
+    const item = li.children[0];
+    // Adds chosen option to array of chosen criteria
+    chosenCriteria.columns.push(
+      item.options[item.selectedIndex].getAttribute("criteria")
+    );
+  });
 
-    sendPost('/filter.html', chosenCriteria);
+  // Get chosen major
+  const discipline = document.getElementById("disciplines");
+  chosenCriteria.major = discipline.options[
+    discipline.selectedIndex
+  ].getAttribute("major");
+  console.log(chosenCriteria);
 
-    e.preventDefault();
+  // Reverses array if sort is set to descending
+  if (document.getElementById("sort").value === "descending") {
+    sortOrder = "descending";
+  }
 
-    // Refreshes page after sending data
-    // window.location.reload();
+  // sendPost("/filter.html", chosenCriteria);
+  return chosenCriteria;
 }
 
-const sendPost = async (url, data) => {
+// Submits POST request to server
+const sendPost = async (event) => {
+  const url = "/filter.html";
+  const data = getCriteria();
+
+  event.preventDefault();
+
   try {
     const response = await axios.post(url, data);
     // const rows = Array.from(response.data);
     // rows.forEach(row => console.log(row));
-    if(sortOrder === 'ascending') {
+    if (sortOrder === "ascending") {
       console.log(response.data);
-    }
-    else {
+    } else {
       console.log(response.data.reverse());
-      document.getElementById('sort').value = 'ascending';
-      sortOrder = 'ascending';
+      document.getElementById("sort").value = "ascending";
+      sortOrder = "ascending";
     }
-  } catch(e) {
+  } catch (e) {
     console.log(e);
   }
+
+  // Refreshes page after sending data
+  // window.location.reload();
 };
 
 // Event listener for Add Column button to call addColumn()
-document.querySelector('.add-column').addEventListener('click', addColumn);
+document.querySelector(".add-column").addEventListener("click", addColumn);
 // Event listener for Delete Column button to call delColumn()
-document.querySelector('.del-column').addEventListener('click', delColumn);
+document.querySelector(".del-column").addEventListener("click", delColumn);
 // Event listener for create button to generate report
-document.querySelector('.create-report').addEventListener('click', getCriteria);
+document.querySelector(".create-report").addEventListener("click", sendPost);
 
 // Populates initial drop down menu
-populateDropDown(column_id);
+populateDropDowns(column_id);
