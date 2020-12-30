@@ -233,7 +233,6 @@ function getCriteria() {
   chosenCriteria.major = discipline.options[
     discipline.selectedIndex
   ].getAttribute("major");
-  console.log(chosenCriteria);
 
   // Reverses array if sort is set to descending
   if (document.getElementById("sort").value === "descending") {
