@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
 }
+
 .title {
   font-size: 3rem;
   text-align: center;
@@ -13,9 +14,9 @@
   color: black;
   height: 4rem;
   text-align: center;
-  width: 10rem;
-  margin-right: .5rem;
-  float: right;
+  width: 12rem;
+  margin-bottom: 0.5rem;
+  border-radius: 25px;
 }
 
 .filter {
@@ -25,17 +26,21 @@
   height: 4rem;
   text-align: center;
   width: 10rem;
-  float: left;
+  /* float: left; */
 }
 
 .selection {
   width: 25rem;
-  font-size: 1.5rem;
-  margin: 0em;
+  font-size: 2rem;
+  /* margin: 0em; */
+}
+
+.create-report {
+  margin-left: 3rem;
 }
 
 .filter-select {
-padding-bottom: 4rem;
+  padding-bottom: 4rem;
 }
 
 input {
@@ -45,17 +50,23 @@ input {
   width: 7rem;
 }
 .add-input {
-  margin: .5rem 0 0 25rem;
+  margin: 0.5rem 0 0 25rem;
 }
 .input-small {
   width: 7rem;
 }
 
-input[type=file]::-webkit-file-upload-button {
+input[type="file"]::-webkit-file-upload-button {
   border: 2px solid black;
-  padding: .8em .8em;
+  padding: 0.8em 0.8em;
   background-color: #ffbc00;
   float: right;
+}
+
+.dropdown-title {
+  margin-bottom: 0;
+  font-weight: bold;
+  font-size: 1.5rem;
 }
 
 #fileUpload {
@@ -64,79 +75,87 @@ input[type=file]::-webkit-file-upload-button {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   line-height: 1.6;
-  background: #D3D3D3;
+  background: #d3d3d3;
   height: 100vh;
 }
 
 a {
   text-decoration: none;
-  color: #333; }
+  color: #333;
+}
 
 ul {
-  list-style: none; }
+  padding-left: 0;
+  margin-top: 0.5rem;
+  list-style: none;
+}
 
 .lead {
   font-size: 3rem;
-  margin-bottom: 2rem; 
+  margin-bottom: 2rem;
   font-weight: bold;
 }
 
 #header-home {
-  background: linear-gradient(
-    rgba(20, 20, 20, 0.6),
-    rgba(20, 20, 20, 0.6)),
+  background: linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)),
     url("../img/VCUEng.jpg") no-repeat center right/cover;
   height: 100vh;
-  color: #fff; 
+  color: #fff;
 }
 #header-reportWriter {
-  color: black; 
+  color: black;
 }
 #header-home .header-content {
   text-align: center;
   padding-top: 10%;
   color: #ffbc00;
- }
+}
 #header-home .header-content h1 {
   font-size: 6rem;
-  line-height: 1.2; 
+  line-height: 1.2;
 }
 
 #logo {
   width: 70px;
   height: 70px;
   color: #fff;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+}
 
 #main-nav {
   display: flex;
   justify-content: flex-end;
-  padding-top: 1rem; }
-  #main-nav ul {
-    display: flex; }
-  #main-nav li {
-    padding: 1rem 1.5rem; 
-    align-self: center;
-  }
-  #main-nav a {
-    text-decoration: none;
-    color: black;
-    text-transform: uppercase;
-    border-bottom: 3px transparent solid;
-    padding-bottom: 0.5rem;
-    transition: border-color 0.5s; }
-    #main-nav a:hover {
-      border-color: #ccc; }
-    #main-nav a.current {
-      border-color: #ffbc00; }
-
+  padding-top: 1rem;
+}
+#main-nav ul {
+  display: flex;
+}
+#main-nav li {
+  padding: 1rem 1.5rem;
+  align-self: center;
+}
+#main-nav a {
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+  border-bottom: 3px transparent solid;
+  padding-bottom: 0.5rem;
+  transition: border-color 0.5s;
+}
+#main-nav a:hover {
+  border-color: #ccc;
+}
+#main-nav a.current {
+  border-color: #ffbc00;
+}
 
 #main-footer {
   background: #ffbc00;
   color: #333;
-  height: 5rem; 
+  height: 5rem;
   position: absolute;
   bottom: -5rem;
   width: 100%;
@@ -145,5 +164,13 @@ ul {
   display: flex;
   justify-content: space-between;
   height: 5rem;
-  align-items: center; 
+  align-items: center;
+}
+
+#criterion {
+  display: inline-block;
+}
+
+#sort {
+  margin-top: 0.5rem;
 }
