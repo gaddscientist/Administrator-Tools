@@ -34,7 +34,7 @@
       <div class="header-content">
       </div>
       <header class="title"> Report </header>
-        <button class="button"> Download </button>
+        <button class="button" onClick="exportTableToCSV('Capstone_Report.csv')">Download</button>
     </div>
   </header>
   <div id="output-table"></div>
@@ -54,7 +54,39 @@
         }
         x = x + "</tr>"
     }
-    x = x + "</table";
+    x = x + "</table"; 
+
+    //dowload to csv file
+    function downloadCSV(csv, filename) {
+    var csvFile;
+    var downloadLink;
+
+    csvFile = new Blob([csv], {type: "text/csv"});
+    downloadLink = document.createElement("a");
+    downloadLink.download = filename;
+
+    // Create a link to the file
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+
+    // Add the link to DOM
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+}
+
+function exportTableToCSV(filename) {
+    var csv = [];
+    var rows = document.querySelectorAll("table tr");
+    
+    for (var i = 0; i < rows.length; i++) {
+        var row = [], cols = rows[i].querySelectorAll("td, th");
+        for (var j = 0; j < cols.length; j++) 
+            row.push(cols[j].innerText);
+        csv.push(row.join(","));        
+    }
+    // Download CSV file
+    downloadCSV(csv.join("\n"), filename);
+}
+
     console.log(x)
     document.getElementById("output-table").innerHTML = x;
     </script>
