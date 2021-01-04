@@ -258,10 +258,10 @@ const sendPost = async (event) => {
     // rows.forEach(row => console.log(row));
     if (sortOrder === "ascending") {
       console.log(response.data);
-      localStorage.setItem('data', repsonse.data);
+      localStorage.setItem('data', JSON.stringify(response.data));
     } else {
       console.log(response.data.reverse());
-      localStorage.setItem('data', response.data.reverse());
+      localStorage.setItem('data', JSON.stringify(response.data.reverse()));
       document.getElementById("sort").value = "ascending";
       sortOrder = "ascending";
     }
