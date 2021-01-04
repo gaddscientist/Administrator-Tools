@@ -43,8 +43,8 @@ for (var i = 0; i < rows.length; i++) {
     for (var j = 0; j < cols.length; j++) 
         if(cols[j].innerText.includes(',')){
             cols[j].innerText.replace(',', ' ');
+            console.log('HELLO HERE');
         }
-
         row.push(cols[j].innerText);
     csv.push(row.join(","));        
 }
