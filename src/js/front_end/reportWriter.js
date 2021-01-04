@@ -250,8 +250,8 @@ const sendPost = async (event) => {
 
   event.preventDefault();
 
-  value = [{Project_Number: 23525, Project_Name: "hello", Client_Name: "bob"}, {Project_Number: 768594, Project_Name: "sdfl", Client_Name: "uytrew"}];
-  value = JSON.stringify(value)
+  // value = [{Project_Number: 23525, Project_Name: "hello", Client_Name: "bob"}, {Project_Number: 768594, Project_Name: "sdfl", Client_Name: "uytrew"}];
+  // value = JSON.stringify(value)
   localStorage.setItem('label', value);
   window.location.href="output.html";
 
@@ -261,10 +261,13 @@ const sendPost = async (event) => {
     // rows.forEach(row => console.log(row));
     if (sortOrder === "ascending") {
       console.log(response.data);
+      localStorage.setItem('data', repsonse.data);
     } else {
       console.log(response.data.reverse());
+      localStorage.setItem('data', response.data.reverse());
       document.getElementById("sort").value = "ascending";
       sortOrder = "ascending";
+      
     }
   } catch (e) {
     console.log(e);
