@@ -17,19 +17,6 @@ x = x + "</table";
 console.log(x)
 document.getElementById("output-table").innerHTML = x;
 
-function getParameterByName() {
-    url = window.location.href;
-    console.log(url)
-    const start = url.search('=') + 1
-    console.log(JSON.parse(url.substring(start, url.length)))
-    return url.substring(start, url.length);
-}
-function getData() {
-data = localStorage.getItem("label");
-localStorage.clear();
-return JSON.parse(data)
-}
-
 //dowload to csv file
 function downloadCSV(csv, filename) {
 var csvFile;
@@ -54,6 +41,10 @@ var rows = document.querySelectorAll("table tr");
 for (var i = 0; i < rows.length; i++) {
     var row = [], cols = rows[i].querySelectorAll("td, th");
     for (var j = 0; j < cols.length; j++) 
+        if(cols[j].innerText.includes(',')){
+            cols[j].innerText.replace(',', ' ');
+        }
+
         row.push(cols[j].innerText);
     csv.push(row.join(","));        
 }
