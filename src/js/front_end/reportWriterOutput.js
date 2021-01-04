@@ -41,11 +41,13 @@ var rows = document.querySelectorAll("table tr");
 for (var i = 0; i < rows.length; i++) {
     var row = [], cols = rows[i].querySelectorAll("td, th");
     for (var j = 0; j < cols.length; j++) 
+        console.log('cols: ', cols, ' cols[j]: ', colds[j], " j: ", j)
         if(cols[j].innerText.includes(',')){
             cols[j].innerText.replace(',', ' ');
             console.log('HELLO HERE');
         }
         row.push(cols[j].innerText);
+        console.log("row", row)
     csv.push(row.join(","));        
 }
 // Download CSV file
