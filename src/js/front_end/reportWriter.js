@@ -252,9 +252,6 @@ const sendPost = async (event) => {
 
   // value = [{Project_Number: 23525, Project_Name: "hello", Client_Name: "bob"}, {Project_Number: 768594, Project_Name: "sdfl", Client_Name: "uytrew"}];
   // value = JSON.stringify(value)
-  localStorage.setItem('label', value);
-  window.location.href="output.html";
-
   try {
     const response = await axios.post(url, data);
     // const rows = Array.from(response.data);
@@ -267,8 +264,8 @@ const sendPost = async (event) => {
       localStorage.setItem('data', response.data.reverse());
       document.getElementById("sort").value = "ascending";
       sortOrder = "ascending";
-      
     }
+    window.location.href="output.html";
   } catch (e) {
     console.log(e);
   }
