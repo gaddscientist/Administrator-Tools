@@ -152,7 +152,7 @@ ul {
   border-color: #ffbc00;
 }
 #page-container {
-  position: relative;
+  position: fixed;
   min-height: 100vh;
 }
 #content-wrap {
