@@ -39,11 +39,11 @@ var rows = document.querySelectorAll("table tr");
 
 for (var i = 0; i < rows.length; i++) {
     var row = [], cols = rows[i].querySelectorAll("td, th");
-    console.log('cols', cols[3].innerText);
+    // console.log('cols', cols[].innerText);
     for (var j = 0; j < cols.length; j++) {
         innerText = cols[j].innerText
         if (innerText.includes(',')) {
-            innerText.replace(',', ' ');
+            innerText.replace(',', '');
             console.log('this here: ', innerText);
         }
         console.log('row', row);
