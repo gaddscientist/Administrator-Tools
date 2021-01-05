@@ -80,6 +80,8 @@ body {
   line-height: 1.6;
   background: #d3d3d3;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -155,11 +157,9 @@ ul {
   background: #ffbc00;
   color: #333;
   height: 5rem;
-  position: fixed;
   width: 100%;
   left: 0;
-  bottom: 0;
-  
+  flex-shrink: 0; 
 }
 #main-footer .footer-content {
   display: flex;
@@ -174,4 +174,9 @@ ul {
 
 #sort {
   margin-top: 0.5rem;
+}
+
+.content-container {
+  min-height: 90vh;
+  flex: 1 0 auto;
 }

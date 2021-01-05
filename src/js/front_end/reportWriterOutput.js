@@ -1,5 +1,6 @@
 var x ="<table class='table table-bordered table-hover'> <thead> <tr>", i;
 data = localStorage.getItem("data");
+console.log(data);
 localStorage.clear();
 data = JSON.parse(data)
 for (const header in data[0]) {

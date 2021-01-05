@@ -36,41 +36,43 @@
     </header>
 
     <!-- Main Content -->
-    <div class="container">
-      <div class="filter-select">
-        <form class="text-center">
-          <label class="selection" for="select-category"> Report Selection Criterion:</label>
-          <br>
-          <input class="input" placeholder=" Category" name="select-category"> </input>  
-          <input class="input" placeholder=" Selection" name="selection"> </input>
-        </form >
-      </div> 
-      <div>
-        <form class="text-center">
-          <label class="selection" for="category"> Reporting Criterion:</label>
-          <br>
-          <button class="button del-column"> Delete Column </button>
-          <button class="button add-column"> Add Column </button>
-          <button class="button create-report">Create</button>
-          <br>
+    <div class="content-container">
+      <div class="container">
+        <div class="filter-select">
+          <form class="text-center">
+            <label class="selection" for="select-category"> Report Selection Criterion:</label>
+            <br>
+            <input class="input" placeholder=" Category" name="select-category"> </input>  
+            <input class="input" placeholder=" Selection" name="selection"> </input>
+          </form >
+        </div> 
+        <div>
+          <form class="text-center">
+            <label class="selection" for="category"> Reporting Criterion:</label>
+            <br>
+            <button class="button del-column"> Delete Column </button>
+            <button class="button add-column"> Add Column </button>
+            <button class="button create-report">Create</button>
+            <br>
 
-          <p class="dropdown-title">Columns to Select:</p>
-          <select name="disciplines" id="disciplines"></select>
-          <select name="sort" id="sort">
-            <option value="ascending">Ascending</option>
-            <option value="descending">Descending</option>
-          </select>
-          <br>
-          <ul id="criterion">
-            <li>
-              <select name="column" class="column-0"></select>
-            </li>
-          </ul>
-        </form>
+            <p class="dropdown-title">Columns to Select:</p>
+            <select name="disciplines" id="disciplines"></select>
+            <select name="sort" id="sort">
+              <option value="ascending">Ascending</option>
+              <option value="descending">Descending</option>
+            </select>
+            <br>
+            <ul id="criterion">
+              <li>
+                <select name="column" class="column-0"></select>
+              </li>
+            </ul>
+          </form>
 
-        <p style="text-align: center; font-weight: bold; font-size: 2rem;">Query will print to the browser console</p>
+          <p style="text-align: center; font-weight: bold; font-size: 2rem;">Query will print to the browser console</p>
+        </div>
+        <br/><br/>
       </div>
-      <br/><br/>
     </div>
 
     <!-- Footer -->
