@@ -41,6 +41,7 @@ for (var i = 0; i < rows.length; i++) {
     var row = [], cols = rows[i].querySelectorAll("td, th");
     console.log('cols', cols);
     for (var j = 0; j < cols.length; j++) 
+        console.log('in loop cols', cols);
         // console.log('cols: ', cols, ' cols[j]: ', cols[j], " j: ", j)
         // console.log(cols[j].innerText);
         // // if(cols[j].innerText.includes(',')){
@@ -48,7 +49,7 @@ for (var i = 0; i < rows.length; i++) {
         // //     console.log('HELLO HERE');
         // // }
         row.push(cols[j].innerText);
-        // console.log("row", row)
+        console.log("row", row)
         // console.log("innerText", cols[j].innerText)
     csv.push(row.join(","));        
 }
