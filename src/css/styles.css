@@ -163,7 +163,7 @@ ul {
   background: #ffbc00;
   color: #333;
   height: 5rem;
-  position: relative;
+  position: sticky;
   bottom: 0;
   width: 100%;
 }
