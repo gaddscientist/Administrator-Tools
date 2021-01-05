@@ -43,7 +43,7 @@ for (var i = 0; i < rows.length; i++) {
     for (var j = 0; j < cols.length; j++) {
         innerText = cols[j].innerText
         if (innerText.includes(',')) {
-            innerText.replace(',', '');
+            innerText = innerText.replace(',', '');
             console.log('this here: ', innerText);
         }
         console.log('row', row);
