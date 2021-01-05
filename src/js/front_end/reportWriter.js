@@ -250,17 +250,18 @@ const sendPost = async (event) => {
 
   event.preventDefault();
 
-  // value = [{Project_Number: 23525, Project_Name: "hello", Client_Name: "bob"}, {Project_Number: 768594, Project_Name: "sdfl", Client_Name: "uytrew"}];
+  value = [{Project_Number: 23525}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 768594}, {Project_Number: 1000000}];
   // value = JSON.stringify(value)
   try {
-    const response = await axios.post(url, data);
+    // const response = await axios.post(url, data);
     // const rows = Array.from(response.data);
     // rows.forEach(row => console.log(row));
     if (sortOrder === "ascending") {
-      console.log(response.data);
-      localStorage.setItem('data', JSON.stringify(response.data));
+      // console.log(response.data);
+      // localStorage.setItem('data', JSON.stringify(response.data));
+      localStorage.setItem('data', JSON.stringify(value));
     } else {
-      console.log(response.data.reverse());
+      // console.log(response.data.reverse());
       localStorage.setItem('data', JSON.stringify(response.data.reverse()));
       document.getElementById("sort").value = "ascending";
       sortOrder = "ascending";
