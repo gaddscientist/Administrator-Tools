@@ -43,6 +43,7 @@ for (var i = 0; i < rows.length; i++) {
     for (var j = 0; j < cols.length; j++) 
         console.log("row", row)
         row.push(cols[j].innerText);
+        console.log("row", row)
     csv.push(row.join(","));        
 }
 // Download CSV file
