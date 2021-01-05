@@ -152,17 +152,18 @@ ul {
   border-color: #ffbc00;
 }
 #page-container {
-  position: fixed;
+  position: relative;
   min-height: 100vh;
 }
 #content-wrap {
-  padding-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
 }
 #main-footer {
   background: #ffbc00;
   color: #333;
   height: 5rem;
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;
 }
