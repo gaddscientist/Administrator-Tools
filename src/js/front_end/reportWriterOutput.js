@@ -42,13 +42,14 @@ for (var i = 0; i < rows.length; i++) {
     var row = [], cols = rows[i].querySelectorAll("td, th");
     for (var j = 0; j < cols.length; j++) 
         console.log('cols: ', cols, ' cols[j]: ', cols[j], " j: ", j)
-        console.log(cols[j].innerText);
-        // if(cols[j].innerText.includes(',')){
-        //     cols[j].innerText.replace(',', ' ');
-        //     console.log('HELLO HERE');
-        // }
+        // console.log(cols[j].innerText);
+        // // if(cols[j].innerText.includes(',')){
+        // //     cols[j].innerText.replace(',', ' ');
+        // //     console.log('HELLO HERE');
+        // // }
         row.push(cols[j].innerText);
         console.log("row", row)
+        console.log("innerText", cols[j].innerText)
     csv.push(row.join(","));        
 }
 // Download CSV file
