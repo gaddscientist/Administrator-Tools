@@ -41,7 +41,7 @@ for (var i = 0; i < rows.length; i++) {
     var row = [], cols = rows[i].querySelectorAll("td, th");
     console.log('cols', cols);
     for (var j = 0; j < cols.length; j++) 
-        console.log("row1", row)
+        console.log("row1", row, j)
         row.push(cols[j].innerText);
         console.log("row2", row)
     csv.push(row.join(","));        
