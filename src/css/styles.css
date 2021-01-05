@@ -159,7 +159,7 @@ ul {
   width: 100%;
   left: 0;
   bottom: 0;
-  padding-top: 90%;
+  min-height: 100%;
 }
 
 #main-footer .footer-content {
