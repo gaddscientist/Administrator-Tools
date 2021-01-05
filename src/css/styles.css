@@ -151,20 +151,21 @@ ul {
 #main-nav a.current {
   border-color: #ffbc00;
 }
-
 #main-footer {
   background: #ffbc00;
   color: #333;
   height: 5rem;
-  position: absolute;
-  bottom: -5rem;
+  position: fixed;
   width: 100%;
+  left: 0;
+  bottom: 0;
+  
 }
 #main-footer .footer-content {
   display: flex;
   justify-content: space-between;
   height: 5rem;
-  align-items: bottom;
+  align-items: center;
 }
 
 #criterion {
