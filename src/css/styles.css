@@ -156,7 +156,7 @@ ul {
   background: #ffbc00;
   color: #333;
   height: 5rem;
-  position: absolute;
+  position: relative;
   bottom: -5rem;
   width: 100%;
 }
