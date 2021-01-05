@@ -14,7 +14,6 @@ for (i=0; i<data.length; i++) {
     x = x + "</tr>"
 }
 x = x + "</table"; 
-console.log(x)
 document.getElementById("output-table").innerHTML = x;
 
 //dowload to csv file
@@ -40,6 +39,7 @@ var rows = document.querySelectorAll("table tr");
 
 for (var i = 0; i < rows.length; i++) {
     var row = [], cols = rows[i].querySelectorAll("td, th");
+    console.log('cols', cols);
     for (var j = 0; j < cols.length; j++) 
         // console.log('cols: ', cols, ' cols[j]: ', cols[j], " j: ", j)
         // console.log(cols[j].innerText);
