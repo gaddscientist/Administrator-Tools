@@ -155,18 +155,11 @@ ul {
   background: #ffbc00;
   color: #333;
   height: 5rem;
-  position: fixed;
+  position: relative;
   width: 100%;
   left: 0;
   bottom: 0;
-  
-}
-
-#div.absolute {
-  position: absolute;
-  bottom: 10px;
-  width: 50%;
-  border: 3px solid #8AC007;
+  padding-top: 90%;
 }
 
 #main-footer .footer-content {
