@@ -41,12 +41,13 @@ for (var i = 0; i < rows.length; i++) {
     var row = [], cols = rows[i].querySelectorAll("td, th");
     console.log('cols', cols[3].innerText);
     for (var j = 0; j < cols.length; j++) {
-        if (cols[j].innerText.includes(',')) {
-            cols[j].innerText.replace(',', ' ');
-            console.log('this here: ', cols[j].innerText);
+        innerText = cols[j].innerText
+        if (innerText.includes(',')) {
+            innerText.replace(',', ' ');
+            console.log('this here: ', innerText);
         }
         console.log('row', row);
-        row.push(cols[j].innerText);
+        row.push(innerText);
     }
     csv.push(row.join(","));        
 }
