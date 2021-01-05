@@ -155,10 +155,12 @@ ul {
 #main-footer {
   background: #ffbc00;
   color: #333;
-  height: 100%;
-  position: relative;
+  height: 5rem;
+  position: absolute;
   bottom: 0;
   width: 100%;
+  padding-top: 50px;
+  padding-bottom: 10px;
 }
 #main-footer .footer-content {
   display: flex;
