@@ -155,9 +155,8 @@ ul {
 #main-footer {
   background: #ffbc00;
   color: #333;
-  height: 5rem;
+  height: 100%;
   position: relative;
-  min-height: 100vh;
   bottom: 0;
   width: 100%;
 }
