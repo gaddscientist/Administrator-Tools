@@ -156,8 +156,9 @@ ul {
   background: #ffbc00;
   color: #333;
   height: 5rem;
-  position: fixed;
-  bottom: -5rem;
+  position: relative;
+  min-height: 100vh;
+  bottom: 0;
   width: 100%;
 }
 #main-footer .footer-content {
