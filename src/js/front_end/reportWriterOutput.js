@@ -40,8 +40,12 @@ var rows = document.querySelectorAll("table tr");
 for (var i = 0; i < rows.length; i++) {
     var row = [], cols = rows[i].querySelectorAll("td, th");
     console.log('cols', cols[3].innerText);
-    for (var j = 0; j < cols.length; j++) 
+    for (var j = 0; j < cols.length; j++) {
+        if(cols[j].innerText.includes(',')){
+            cols[j].innerText.replace(',', ' ');
+        }
         row.push(cols[j].innerText);
+    }
     csv.push(row.join(","));        
 }
 // Download CSV file
