@@ -159,8 +159,7 @@ ul {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding-top: 50px;
-  padding-bottom: 10px;
+  padding-top: 100px;
 }
 #main-footer .footer-content {
   display: flex;
