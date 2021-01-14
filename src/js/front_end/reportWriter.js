@@ -162,6 +162,7 @@ function populateDisciplineDropDown() {
 
     if (show) {
         checkboxes.style.display = "block";
+        checkboxes.style.position = "absolute";
         show = false;
     } else {
         checkboxes.style.display = "none";
@@ -303,6 +304,23 @@ const sendPost = async (event) => {
   // window.location.reload();
 };
 
+
+
+let mouseTimeOut;
+// Hides dropdown on mouse leave
+function hideDropDown() {
+  const checkboxes = document.getElementById("disciplines");
+  mouseTimeOut = setTimeout(() => {
+    checkboxes.style.display = "none";
+    show = true;
+  }, 1000);
+}
+
+// Keeps drop down visible if mouse moves back over
+function keepDropDown() {
+  clearTimeout(mouseTimeOut);
+}
+
 // Event listener for Add Column button to call addColumn()
 document.querySelector(".add-column").addEventListener("click", addColumn);
 // Event listener for Delete Column button to call delColumn()
@@ -313,6 +331,9 @@ document.querySelector(".create-report").addEventListener("click", sendPost);
 document.querySelector(".select-title").addEventListener("click", populateDisciplineDropDown);
 // Event listener for All Majors checkbox
 document.querySelector("#all").addEventListener("change", toggleAllMajors);
+
+document.querySelector(".disciplines").addEventListener('mouseleave', hideDropDown);
+document.querySelector(".disciplines").addEventListener('mouseover', keepDropDown);
 
 // Populates initial drop down menu
 populateDropDowns(column_id);
