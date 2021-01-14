@@ -155,17 +155,31 @@ function populateCriteriaDropDown(colID) {
   }
 }
 
+// function populateDisciplineDropDown() {
+//   // Adds selections to disciplines drop down
+//   for (const discipline in disciplines) {
+//     // Creates option elements from given list of majors
+//     const dropdown = document.getElementById("disciplines");
+//     const item = document.createElement("option");
+//     item.textContent = disciplines[discipline];
+//     item.value = disciplines[discipline];
+//     item.setAttribute("major", disciplines[discipline]);
+//     dropdown.appendChild(item);
+//   }
+// }
+
+let show = true;
 function populateDisciplineDropDown() {
-  // Adds selections to disciplines drop down
-  for (const discipline in disciplines) {
-    // Creates option elements from given list of majors
-    const dropdown = document.getElementById("disciplines");
-    const item = document.createElement("option");
-    item.textContent = disciplines[discipline];
-    item.value = disciplines[discipline];
-    item.setAttribute("major", disciplines[discipline]);
-    dropdown.appendChild(item);
-  }
+  const checkboxes = document.getElementById("checkBoxes");
+
+    if (show) {
+        checkboxes.style.display = "block";
+        // checkboxes.childNodes.style.display = "absolute";
+        show = false;
+    } else {
+        checkboxes.style.display = "none";
+        show = true;
+    }
 }
 
 function populateDropDowns(colID) {

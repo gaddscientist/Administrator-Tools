@@ -180,3 +180,42 @@ ul {
   min-height: 90vh;
   flex: 1 0 auto;
 }
+
+/* Majors Dropdown Styles */
+.multipleSelection { 
+  width: 150px; 
+  /* background-color: #BCC2C1;  */
+  background-color: #eff0f1;
+  display: inline-block;
+} 
+
+.selectBox { 
+  position: relative; 
+} 
+
+.selectBox select { 
+  width: 100%; 
+} 
+
+.overSelect { 
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  top: 0; 
+  bottom: 0; 
+} 
+
+#checkBoxes { 
+  display: none; 
+  border: 1px #2596be solid; 
+  text-align: left;
+} 
+
+#checkBoxes label { 
+  display: block; 
+  background-color: #eff0f1;
+} 
+
+#checkBoxes label:hover { 
+  background-color: #2596be; 
+} 

@@ -56,7 +56,48 @@
             <br>
 
             <p class="dropdown-title">Columns to Select:</p>
-            <select name="disciplines" id="disciplines"></select>
+
+
+            <div class="multipleSelection"> 
+              <div class="selectBox" 
+                  onclick="populateDisciplineDropDown()"> 
+                  <select> 
+                      <option>Select Majors</option> 
+                  </select> 
+                  <div class="overSelect"></div> 
+              </div> 
+    
+              <div id="checkBoxes"> 
+                  <label for="biomedical"> 
+                      <input type="checkbox" id="biomedical" /> 
+                      Biomedical
+                  </label> 
+                    
+                  <label for="chemical"> 
+                      <input type="checkbox" id="chemical" /> 
+                      Chemical
+                  </label> 
+                  <label for="compsci"> 
+                      <input type="checkbox" id="compsci" /> 
+                      Computer Science
+                  </label> 
+                  <label for="computer"> 
+                      <input type="checkbox" id="computer" /> 
+                      Computer
+                  </label> 
+                  <label for="electrical"> 
+                      <input type="checkbox" id="electrical" /> 
+                      Electrical
+                  </label> 
+                  <label for="mechanical"> 
+                      <input type="checkbox" id="mechanical" /> 
+                      Mechanical
+                  </label> 
+              </div> 
+          </div> 
+
+
+
             <select name="sort" id="sort">
               <option value="ascending">Ascending</option>
               <option value="descending">Descending</option>
