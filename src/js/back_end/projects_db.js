@@ -17,12 +17,20 @@ connection.connect(function (err, columns) {
 });
 
 // External function to be called from server.js
-async function query(cols, major) {
+async function query(cols, majors) {
   // Creates query string
-  const query = buildQueryString(cols, major);
+  console.log(cols, majors);
+  const query = buildQueryString(cols, majors);
+  console.log("Query = " + query);
 
-  const data = cols;
-  major === "All Majors" ? data.push("*") : data.push("%" + major + "%");
+  let data = cols;
+  if(!majors.includes("All Majors")) {
+    // data = data.concat(majors);
+    majors.forEach(major => {
+      data.push('%' + major + '%');
+    });
+  }
+  console.log("data = " + data);
 
   // Executes query string
   const queryArr = await executeQuery(query, data);
@@ -31,25 +39,37 @@ async function query(cols, major) {
 }
 
 // Creates SQL query statement to be executed
-function buildQueryString(cols, major) {
+function buildQueryString(cols, majors) {
   let query = "SELECT ";
 
   // Adds one placeholder for each specified column
-  cols.forEach((col) => {
+  cols.forEach(() => {
     query += "??, ";
   });
 
   // Removes trailing ', ' from last placeholder
   query = query.slice(0, -2);
 
+  query += " From `projects`";
+
   // Finishes query
-  if (major === "All Majors") {
-    query += " FROM `projects`";
-  } else if (major === "Computer") {
-    query +=
-      " FROM `projects` WHERE `Project_Categories` LIKE ? AND `Project_Categories` NOT LIKE '%Computer Science%'";
+  if (majors[0] === "All Majors") {
+    return query;
   } else {
-    query += " FROM `projects` WHERE `Project_Categories` LIKE ?";
+    query += " WHERE "
+  }
+
+  // Adds one placeholder for each specified major
+  majors.forEach((major, index) => {
+    query += "`Project_Categories` LIKE ?"
+    if(index < majors.length - 1) {
+      query += " OR ";
+    }
+  });
+
+  // Checks to see if user wants Computer Engineering results but not Computer Science results
+  if(majors.includes("Computer") && !majors.includes("Computer Science")) {
+    query += " AND `Project_Categories` NOT LIKE '%Computer Science%'";
   }
 
   // Returns finished query

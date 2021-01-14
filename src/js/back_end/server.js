@@ -17,10 +17,10 @@ app.use(express.json());
 app.post("/filter.html", async function (req, res) {
   // Gets chosen criteria into local variable
   const columns = Array.from(req.body.columns);
-  const major = req.body.major;
+  const majors = req.body.majors;
 
   // Queries database with selected columns
-  const rows = await db.query(columns, major);
+  const rows = await db.query(columns, majors);
 
   // Logs to terminal
   console.log(rows);
