@@ -185,6 +185,14 @@ function toggleAllMajors() {
   }
 }
 
+// Unchecks the 'All Majors' box if any other discipline is unchecked
+function uncheckAllMajors() {
+  const allMajors = document.getElementById("all");
+  if(allMajors.checked === true) {
+    allMajors.checked = false;
+  }
+}
+
 // Adds criteria to drop down selectors
 function populateDropDowns(colID) {
   populateCriteriaDropDown(colID);
