@@ -14,15 +14,15 @@ columns = {
   Student_4_Email: "Fourth Student - Name",
 };
 
-disciplines = [
-  "All Majors",
-  "Biomedical",
-  "Chemical",
-  "Computer Science",
-  "Computer",
-  "Electrical",
-  "Mechanical",
-];
+disciplines = {
+  "all": "All Majors",
+  "biomedical": "Biomedical",
+  "chemical": "Chemical",
+  "compsci": "Computer Science",
+  "computer": "Computer",
+  "electrical": "Electrical",
+  "mechanical": "Mechanical",
+};
 
 // const columns = [
 //   'Project_Number',
@@ -168,13 +168,12 @@ function populateCriteriaDropDown(colID) {
 //   }
 // }
 
-let show = true;
+let show = false;
 function populateDisciplineDropDown() {
   const checkboxes = document.getElementById("checkBoxes");
 
     if (show) {
         checkboxes.style.display = "block";
-        // checkboxes.childNodes.style.display = "absolute";
         show = false;
     } else {
         checkboxes.style.display = "none";
@@ -225,7 +224,7 @@ function getCriteria() {
   // Create object
   const chosenCriteria = {
     columns: [],
-    major: "",
+    majors: [],
   };
 
   // Gets all desired columns
@@ -242,11 +241,16 @@ function getCriteria() {
     );
   });
 
-  // Get chosen major
-  const discipline = document.getElementById("disciplines");
-  chosenCriteria.major = discipline.options[
-    discipline.selectedIndex
-  ].getAttribute("major");
+  // Adds selected majors to chosen criteria payload
+  const chosenMajors = [];
+  for(const discipline in disciplines) {
+        const checkbox = document.getElementById(discipline);
+        if(checkbox.checked === true) {
+          // console.log(discipline);
+          chosenMajors.push(disciplines[discipline]);
+        }
+  };
+  chosenCriteria.majors = chosenMajors;
 
   // Reverses array if sort is set to descending
   if (document.getElementById("sort").value === "descending") {
