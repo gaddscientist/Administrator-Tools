@@ -141,7 +141,7 @@ disciplines = {
 let column_id = 0;
 let sortOrder = "ascending";
 
-// Adds selection criteria to drop down menu
+// Adds selection criteria to drop down selector
 function populateCriteriaDropDown(colID) {
   // Adds selections to columns drop down
   for (const column in columns) {
@@ -155,22 +155,10 @@ function populateCriteriaDropDown(colID) {
   }
 }
 
-// function populateDisciplineDropDown() {
-//   // Adds selections to disciplines drop down
-//   for (const discipline in disciplines) {
-//     // Creates option elements from given list of majors
-//     const dropdown = document.getElementById("disciplines");
-//     const item = document.createElement("option");
-//     item.textContent = disciplines[discipline];
-//     item.value = disciplines[discipline];
-//     item.setAttribute("major", disciplines[discipline]);
-//     dropdown.appendChild(item);
-//   }
-// }
-
 let show = false;
+// Adds disciplines to drop down selector
 function populateDisciplineDropDown() {
-  const checkboxes = document.getElementById("checkBoxes");
+  const checkboxes = document.getElementById("disciplines");
 
     if (show) {
         checkboxes.style.display = "block";
@@ -181,6 +169,23 @@ function populateDisciplineDropDown() {
     }
 }
 
+// Toggles all check boxes when All Majors is selected
+function toggleAllMajors() {
+  const allMajors = document.getElementById("all");
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  if(allMajors.checked === true) {
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = true;
+    }); 
+  }
+  else {
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = false;
+    }); 
+  }
+}
+
+// Adds criteria to drop down selectors
 function populateDropDowns(colID) {
   populateCriteriaDropDown(colID);
   populateDisciplineDropDown();
@@ -257,7 +262,6 @@ function getCriteria() {
     sortOrder = "descending";
   }
 
-  // sendPost("/filter.html", chosenCriteria);
   return chosenCriteria;
 }
 
@@ -297,6 +301,10 @@ document.querySelector(".add-column").addEventListener("click", addColumn);
 document.querySelector(".del-column").addEventListener("click", delColumn);
 // Event listener for create button to generate report
 document.querySelector(".create-report").addEventListener("click", sendPost);
+// Event listener for Disciplines drop down
+document.querySelector(".select-title").addEventListener("click", populateDisciplineDropDown);
+// Event listener for All Majors checkbox
+document.querySelector("#all").addEventListener("change", toggleAllMajors);
 
 // Populates initial drop down menu
 populateDropDowns(column_id);

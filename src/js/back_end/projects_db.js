@@ -18,19 +18,16 @@ connection.connect(function (err, columns) {
 
 // External function to be called from server.js
 async function query(cols, majors) {
-  // Creates query string
-  console.log(cols, majors);
+  // Creates parameterized query string
   const query = buildQueryString(cols, majors);
-  console.log("Query = " + query);
 
   let data = cols;
+  // Adds each selected major to the list of parameters for query unless all majors are requested
   if(!majors.includes("All Majors")) {
-    // data = data.concat(majors);
     majors.forEach(major => {
       data.push('%' + major + '%');
     });
   }
-  console.log("data = " + data);
 
   // Executes query string
   const queryArr = await executeQuery(query, data);
@@ -50,10 +47,11 @@ function buildQueryString(cols, majors) {
   // Removes trailing ', ' from last placeholder
   query = query.slice(0, -2);
 
+  // Database table selection
   query += " From `projects`";
 
-  // Finishes query
-  if (majors[0] === "All Majors") {
+  // Continues query if majors are specified
+  if (majors.includes("All Majors")) {
     return query;
   } else {
     query += " WHERE "

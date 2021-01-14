@@ -7,12 +7,6 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// ONLY LEFT IN AS AN EXAMPLE. index.html REQUEST HANDLED BY DEFAULT HANDLER
-// Handles route to index.html
-// app.get('/', function(req, res){
-//     res.sendFile('index.html');
-// });
-
 // Handles POST requests to built report
 app.post("/filter.html", async function (req, res) {
   // Gets chosen criteria into local variable

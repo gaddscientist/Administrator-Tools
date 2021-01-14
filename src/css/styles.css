@@ -189,15 +189,15 @@ ul {
   display: inline-block;
 } 
 
-.selectBox { 
+.select-title { 
   position: relative; 
 } 
 
-.selectBox select { 
+.select-title select { 
   width: 100%; 
 } 
 
-.overSelect { 
+.hide-title { 
   position: absolute; 
   left: 0; 
   right: 0; 
@@ -205,17 +205,17 @@ ul {
   bottom: 0; 
 } 
 
-#checkBoxes { 
+#disciplines { 
   display: none; 
   border: 1px #2596be solid; 
   text-align: left;
 } 
 
-#checkBoxes label { 
+#disciplines label { 
   display: block; 
   background-color: #eff0f1;
 } 
 
-#checkBoxes label:hover { 
+#disciplines label:hover { 
   background-color: #2596be; 
 } 
