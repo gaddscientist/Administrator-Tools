@@ -162,7 +162,7 @@ function populateDisciplineDropDown() {
 
     if (show) {
         checkboxes.style.display = "block";
-        checkboxes.style.position = "absolute";
+        // checkboxes.style.position = "absolute";
         show = false;
     } else {
         checkboxes.style.display = "none";
@@ -331,7 +331,7 @@ document.querySelector(".create-report").addEventListener("click", sendPost);
 document.querySelector(".select-title").addEventListener("click", populateDisciplineDropDown);
 // Event listener for All Majors checkbox
 document.querySelector("#all").addEventListener("change", toggleAllMajors);
-
+// Event listeners to hide/show the discipline's dropdown
 document.querySelector(".disciplines").addEventListener('mouseleave', hideDropDown);
 document.querySelector(".disciplines").addEventListener('mouseover', keepDropDown);
 

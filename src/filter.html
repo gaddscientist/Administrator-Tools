@@ -50,14 +50,16 @@
           <form class="text-center">
             <label class="selection" for="category"> Reporting Criterion:</label>
             <br>
+
+            <!-- Buttons -->
             <button class="button del-column"> Delete Column </button>
             <button class="button add-column"> Add Column </button>
             <button class="button create-report">Create</button>
             <br>
 
+            <!-- Criteria -->
             <p class="dropdown-title">Columns to Select:</p>
-
-
+            <!-- Disciplines Drop Down Menu -->
             <div class="disciplines"> 
               <div class="select-title"> 
                   <select> 
@@ -65,7 +67,6 @@
                   </select> 
                   <div class="hide-title"></div> 
               </div> 
-    
               <div id="disciplines"> 
                   <label for="all"> 
                       <input type="checkbox" id="all" /> 
@@ -98,21 +99,18 @@
               </div> 
           </div> 
 
-
-
-            <select name="sort" id="sort">
-              <option value="ascending">Ascending</option>
-              <option value="descending">Descending</option>
-            </select>
-            <br>
-            <ul id="criterion">
-              <li>
-                <select name="column" class="column-0"></select>
-              </li>
-            </ul>
+          <!-- Sort Order -->
+          <select name="sort" id="sort">
+            <option value="ascending">Ascending</option>
+            <option value="descending">Descending</option>
+          </select>
+          <br>
+          <ul id="criterion">
+            <li>
+              <select name="column" class="column-0"></select>
+            </li>
+          </ul>
           </form>
-
-          <p style="text-align: center; font-weight: bold; font-size: 2rem;">Query will print to the browser console</p>
         </div>
         <br/><br/>
       </div>

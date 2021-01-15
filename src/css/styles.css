@@ -184,7 +184,6 @@ ul {
 /* Majors Dropdown Styles */
 .disciplines { 
   width: 150px; 
-  /* background-color: #BCC2C1;  */
   background-color: #eff0f1;
   display: inline-block;
 } 
@@ -207,8 +206,8 @@ ul {
 
 #disciplines { 
   display: none; 
-  border: 1px #2596be solid; 
   text-align: left;
+  position: absolute;
 } 
 
 #disciplines label { 
@@ -216,8 +215,12 @@ ul {
   background-color: #eff0f1;
   margin-bottom: 0;
   padding-bottom: 5px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-weight: 400;
 } 
 
 #disciplines label:hover { 
   background-color: #2596be; 
+  color: white;
 } 
