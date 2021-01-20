@@ -50,26 +50,67 @@
           <form class="text-center">
             <label class="selection" for="category"> Reporting Criterion:</label>
             <br>
+
+            <!-- Buttons -->
             <button class="button del-column"> Delete Column </button>
             <button class="button add-column"> Add Column </button>
             <button class="button create-report">Create</button>
             <br>
 
+            <!-- Criteria -->
             <p class="dropdown-title">Columns to Select:</p>
-            <select name="disciplines" id="disciplines"></select>
-            <select name="sort" id="sort">
-              <option value="ascending">Ascending</option>
-              <option value="descending">Descending</option>
-            </select>
-            <br>
-            <ul id="criterion">
-              <li>
-                <select name="column" class="column-0"></select>
-              </li>
-            </ul>
-          </form>
+            <!-- Disciplines Drop Down Menu -->
+            <div class="disciplines"> 
+              <div class="select-title"> 
+                  <select> 
+                      <option>Select Majors</option> 
+                  </select> 
+                  <div class="hide-title"></div> 
+              </div> 
+              <div id="disciplines"> 
+                  <label for="all"> 
+                      <input type="checkbox" id="all" /> 
+                      All Majors
+                  </label> 
+                  <label for="biomedical" onclick="uncheckAllMajors()"> 
+                      <input type="checkbox" id="biomedical" /> 
+                      Biomedical
+                  </label> 
+                  <label for="chemical" onclick="uncheckAllMajors()"> 
+                      <input type="checkbox" id="chemical" /> 
+                      Chemical
+                  </label> 
+                  <label for="compsci" onclick="uncheckAllMajors()"> 
+                      <input type="checkbox" id="compsci" /> 
+                      Computer Science
+                  </label> 
+                  <label for="computer" onclick="uncheckAllMajors()"> 
+                      <input type="checkbox" id="computer" /> 
+                      Computer
+                  </label> 
+                  <label for="electrical" onclick="uncheckAllMajors()"> 
+                      <input type="checkbox" id="electrical" /> 
+                      Electrical
+                  </label> 
+                  <label for="mechanical" onclick="uncheckAllMajors()"> 
+                      <input type="checkbox" id="mechanical" /> 
+                      Mechanical
+                  </label> 
+              </div> 
+          </div> 
 
-          <p style="text-align: center; font-weight: bold; font-size: 2rem;">Query will print to the browser console</p>
+          <!-- Sort Order -->
+          <select name="sort" id="sort">
+            <option value="ascending">Ascending</option>
+            <option value="descending">Descending</option>
+          </select>
+          <br>
+          <ul id="criterion">
+            <li>
+              <select name="column" class="column-0"></select>
+            </li>
+          </ul>
+          </form>
         </div>
         <br/><br/>
       </div>

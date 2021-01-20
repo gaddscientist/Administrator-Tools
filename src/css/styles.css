@@ -180,3 +180,47 @@ ul {
   min-height: 90vh;
   flex: 1 0 auto;
 }
+
+/* Majors Dropdown Styles */
+.disciplines { 
+  width: 150px; 
+  background-color: #eff0f1;
+  display: inline-block;
+} 
+
+.select-title { 
+  position: relative; 
+} 
+
+.select-title select { 
+  width: 100%; 
+} 
+
+.hide-title { 
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  top: 0; 
+  bottom: 0; 
+} 
+
+#disciplines { 
+  display: none; 
+  text-align: left;
+  position: absolute;
+} 
+
+#disciplines label { 
+  display: block; 
+  background-color: #eff0f1;
+  margin-bottom: 0;
+  padding-bottom: 5px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-weight: 400;
+} 
+
+#disciplines label:hover { 
+  background-color: #2596be; 
+  color: white;
+} 

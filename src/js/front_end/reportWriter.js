@@ -14,15 +14,15 @@ columns = {
   Student_4_Email: "Fourth Student - Name",
 };
 
-disciplines = [
-  "All Majors",
-  "Biomedical",
-  "Chemical",
-  "Computer Science",
-  "Computer",
-  "Electrical",
-  "Mechanical",
-];
+disciplines = {
+  "all": "All Majors",
+  "biomedical": "Biomedical",
+  "chemical": "Chemical",
+  "compsci": "Computer Science",
+  "computer": "Computer",
+  "electrical": "Electrical",
+  "mechanical": "Mechanical",
+};
 
 // const columns = [
 //   'Project_Number',
@@ -141,7 +141,7 @@ disciplines = [
 let column_id = 0;
 let sortOrder = "ascending";
 
-// Adds selection criteria to drop down menu
+// Adds selection criteria to drop down selector
 function populateCriteriaDropDown(colID) {
   // Adds selections to columns drop down
   for (const column in columns) {
@@ -155,19 +155,46 @@ function populateCriteriaDropDown(colID) {
   }
 }
 
+let show = false;
+// Adds disciplines to drop down selector
 function populateDisciplineDropDown() {
-  // Adds selections to disciplines drop down
-  for (const discipline in disciplines) {
-    // Creates option elements from given list of majors
-    const dropdown = document.getElementById("disciplines");
-    const item = document.createElement("option");
-    item.textContent = disciplines[discipline];
-    item.value = disciplines[discipline];
-    item.setAttribute("major", disciplines[discipline]);
-    dropdown.appendChild(item);
+  const checkboxes = document.getElementById("disciplines");
+
+    if (show) {
+        checkboxes.style.display = "block";
+        // checkboxes.style.position = "absolute";
+        show = false;
+    } else {
+        checkboxes.style.display = "none";
+        show = true;
+    }
+}
+
+// Toggles all check boxes when All Majors is selected
+function toggleAllMajors() {
+  const allMajors = document.getElementById("all");
+  const checkboxes = document.querySelectorAll("input[type=checkbox]");
+  if(allMajors.checked === true) {
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = true;
+    }); 
+  }
+  else {
+    checkboxes.forEach(checkbox => {
+      checkbox.checked = false;
+    }); 
   }
 }
 
+// Unchecks the 'All Majors' box if any other discipline is unchecked
+function uncheckAllMajors() {
+  const allMajors = document.getElementById("all");
+  if(allMajors.checked === true) {
+    allMajors.checked = false;
+  }
+}
+
+// Adds criteria to drop down selectors
 function populateDropDowns(colID) {
   populateCriteriaDropDown(colID);
   populateDisciplineDropDown();
@@ -211,7 +238,7 @@ function getCriteria() {
   // Create object
   const chosenCriteria = {
     columns: [],
-    major: "",
+    majors: [],
   };
 
   // Gets all desired columns
@@ -228,18 +255,22 @@ function getCriteria() {
     );
   });
 
-  // Get chosen major
-  const discipline = document.getElementById("disciplines");
-  chosenCriteria.major = discipline.options[
-    discipline.selectedIndex
-  ].getAttribute("major");
+  // Adds selected majors to chosen criteria payload
+  const chosenMajors = [];
+  for(const discipline in disciplines) {
+        const checkbox = document.getElementById(discipline);
+        if(checkbox.checked === true) {
+          // console.log(discipline);
+          chosenMajors.push(disciplines[discipline]);
+        }
+  };
+  chosenCriteria.majors = chosenMajors;
 
   // Reverses array if sort is set to descending
   if (document.getElementById("sort").value === "descending") {
     sortOrder = "descending";
   }
 
-  // sendPost("/filter.html", chosenCriteria);
   return chosenCriteria;
 }
 
@@ -273,12 +304,36 @@ const sendPost = async (event) => {
   // window.location.reload();
 };
 
+
+
+let mouseTimeOut;
+// Hides dropdown on mouse leave
+function hideDropDown() {
+  const checkboxes = document.getElementById("disciplines");
+  mouseTimeOut = setTimeout(() => {
+    checkboxes.style.display = "none";
+    show = true;
+  }, 1000);
+}
+
+// Keeps drop down visible if mouse moves back over
+function keepDropDown() {
+  clearTimeout(mouseTimeOut);
+}
+
 // Event listener for Add Column button to call addColumn()
 document.querySelector(".add-column").addEventListener("click", addColumn);
 // Event listener for Delete Column button to call delColumn()
 document.querySelector(".del-column").addEventListener("click", delColumn);
 // Event listener for create button to generate report
 document.querySelector(".create-report").addEventListener("click", sendPost);
+// Event listener for Disciplines drop down
+document.querySelector(".select-title").addEventListener("click", populateDisciplineDropDown);
+// Event listener for All Majors checkbox
+document.querySelector("#all").addEventListener("change", toggleAllMajors);
+// Event listeners to hide/show the discipline's dropdown
+document.querySelector(".disciplines").addEventListener('mouseleave', hideDropDown);
+document.querySelector(".disciplines").addEventListener('mouseover', keepDropDown);
 
 // Populates initial drop down menu
 populateDropDowns(column_id);

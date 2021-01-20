@@ -7,20 +7,14 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-// ONLY LEFT IN AS AN EXAMPLE. index.html REQUEST HANDLED BY DEFAULT HANDLER
-// Handles route to index.html
-// app.get('/', function(req, res){
-//     res.sendFile('index.html');
-// });
-
 // Handles POST requests to built report
 app.post("/filter.html", async function (req, res) {
   // Gets chosen criteria into local variable
   const columns = Array.from(req.body.columns);
-  const major = req.body.major;
+  const majors = req.body.majors;
 
   // Queries database with selected columns
-  const rows = await db.query(columns, major);
+  const rows = await db.query(columns, majors);
 
   // Logs to terminal
   console.log(rows);
