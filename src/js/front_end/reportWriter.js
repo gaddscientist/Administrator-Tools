@@ -210,6 +210,7 @@ function addColumn(e) {
 
     li.innerHTML = `
       <select name="column" class="column-${column_id}"></select>
+      <input class="input-${column_id}" type="text">
     `;
     document.getElementById('criterion').appendChild(li);
     populateCriteriaDropDown(column_id);
@@ -250,10 +251,14 @@ function getCriteria() {
   selectionArr.forEach(li => {
     // Each "selection" element within the li
     const item = li.children[0];
+    // Each desired critera and input per selection item
+    const criteria = item.options[item.selectedIndex].getAttribute('criteria');
+    console.log(criteria);
+    const queryVal = li.children[1].value;
     // Adds chosen option to array of chosen criteria
-    chosenCriteria.columns.push(
-      item.options[item.selectedIndex].getAttribute('criteria')
-    );
+    chosenCriteria.columns.push({
+      [criteria]: queryVal,
+    });
   });
 
   // Adds selected majors to chosen criteria payload
