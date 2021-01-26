@@ -21,7 +21,10 @@ async function query(cols, majors, multi) {
   // Creates parameterized query string
   const query = buildQueryString(cols, majors, multi);
 
-  let data = cols;
+  let data = [];
+  cols.forEach(col => data.push(Object.keys(col)[0]));
+  console.log('data');
+  console.log(data);
   // Adds each selected major to the list of parameters for query unless all majors are requested
   if (!majors.includes('All Majors')) {
     majors.forEach(major => {
@@ -33,6 +36,25 @@ async function query(cols, majors, multi) {
   const queryArr = await executeQuery(query, data);
 
   return queryArr;
+}
+
+function appendSpecificationString(cols) {
+  const columns = cols.filter(col => Object.values(col)[0] !== '');
+  if (columns.length === 0) {
+    return '';
+  } else {
+    let userSpecification = ' ';
+    columns.forEach((col, index) => {
+      const key = Object.keys(col)[0];
+      const value = Object.values(col)[0];
+      userSpecification += `${key} LIKE '%${value}%'`;
+      if (index < columns.length - 1) {
+        userSpecification += ' AND ';
+      }
+    });
+
+    return userSpecification;
+  }
 }
 
 // Creates SQL query statement to be executed
@@ -50,18 +72,25 @@ function buildQueryString(cols, majors, multi) {
   // Database table selection
   query += ' From `projects`';
 
+  const specification = appendSpecificationString(cols);
+
   // Continues query if majors are specified
-  if (majors.includes('All Majors')) {
+  if (majors.includes('All Majors') && specification === '') {
+    return query;
+  } else if (majors.includes('All Majors')) {
+    query += ' WHERE ' + specification;
+    console.log(query);
     return query;
   } else {
     query += ' WHERE ';
   }
 
+  query += specification + ' AND (';
+
   // Adds one placeholder for each specified major
   majors.forEach((major, index) => {
     query += '`Project_Categories` LIKE ?';
     if (index < majors.length - 1 && multi === 'only') {
-      console.log('HERE');
       query += ' AND ';
     } else if (index < majors.length - 1) {
       query += ' OR ';
@@ -82,6 +111,7 @@ function buildQueryString(cols, majors, multi) {
     query += " AND `Project_Categories` LIKE '%Multidisciplinary'";
   }
 
+  query += ')';
   console.log(query);
   // Returns finished query
   return query;

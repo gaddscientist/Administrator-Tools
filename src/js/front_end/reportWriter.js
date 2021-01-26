@@ -253,7 +253,6 @@ function getCriteria() {
     const item = li.children[0];
     // Each desired critera and input per selection item
     const criteria = item.options[item.selectedIndex].getAttribute('criteria');
-    console.log(criteria);
     const queryVal = li.children[1].value;
     // Adds chosen option to array of chosen criteria
     chosenCriteria.columns.push({
@@ -266,7 +265,6 @@ function getCriteria() {
   for (const discipline in disciplines) {
     const checkbox = document.getElementById(discipline);
     if (checkbox.checked === true) {
-      // console.log(discipline);
       chosenMajors.push(disciplines[discipline]);
     }
   }
