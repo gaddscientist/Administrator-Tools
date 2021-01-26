@@ -1,32 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+      crossorigin="anonymous"
+    />
     <!-- Links fontawesome icons to html file -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+      crossorigin="anonymous"
+    />
     <!-- Links google font -->
-    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato&display=swap"
+      rel="stylesheet"
+    />
     <!-- Personal Styles -->
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
-    <link rel="stylesheet" media="screen and (max-width: 768px)" href="css/mobile.css">
-    <link rel="stylesheet" media="screen and (min-width: 1100px)" href="css/widescreen.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU=" crossorigin="anonymous" />
-
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link
+      rel="stylesheet"
+      media="screen and (max-width: 768px)"
+      href="css/mobile.css"
+    />
+    <link
+      rel="stylesheet"
+      media="screen and (min-width: 1100px)"
+      href="css/widescreen.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+      integrity="sha256-PHcOkPmOshsMBC+vtJdVr5Mwb7r0LkSVJPlPrp/IMpU="
+      crossorigin="anonymous"
+    />
 
     <title>Capstone</title>
-</head>
-<body>
-
-  <!-- Header -->
+  </head>
+  <body>
+    <!-- Header -->
     <header id="header-reportWriter">
       <div class="container">
         <nav id="main-nav">
           <ul>
             <li><img src="img/vcu_logo.png" alt="Capstone" id="logo" /></li>
-            <li><a href="index.html" >Home</a></li>
+            <li><a href="index.html">Home</a></li>
             <li><a href="#">Bidding</a></li>
             <li><a href="#">Budgeting</a></li>
             <li><a href="reportWriter.html" class="current">Reports</a></li>
@@ -38,24 +62,26 @@
     <!-- Main Content -->
     <div class="content-container">
       <div class="container">
-        <div class="filter-select">
+        <!-- <div class="filter-select">
           <form class="text-center">
             <label class="selection" for="select-category"> Report Selection Criterion:</label>
             <br>
             <input class="input" placeholder=" Category" name="select-category"> </input>  
             <input class="input" placeholder=" Selection" name="selection"> </input>
           </form >
-        </div> 
-        <div>
+        </div>  -->
+        <div class="card">
           <form class="text-center">
-            <label class="selection" for="category"> Reporting Criterion:</label>
-            <br>
+            <label class="selection" for="category">
+              Reporting Criterion:</label
+            >
+            <br />
 
             <!-- Buttons -->
-            <button class="button del-column"> Delete Column </button>
-            <button class="button add-column"> Add Column </button>
+            <button class="button del-column">Delete Column</button>
+            <button class="button add-column">Add Column</button>
             <button class="button create-report">Create</button>
-            <br>
+            <br />
 
             <!-- Criteria -->
             <p class="dropdown-title">Columns to Select:</p>
@@ -65,68 +91,74 @@
               <option value="only">Only Multi-discipline</option>
             </select>
             <!-- Disciplines Drop Down Menu -->
-            <div class="disciplines"> 
-              <div class="select-title"> 
-                  <select> 
-                      <option>Select Majors</option> 
-                  </select> 
-                  <div class="hide-title"></div> 
-              </div> 
-              <div id="disciplines"> 
-                  <label for="all"> 
-                      <input type="checkbox" id="all" /> 
-                      All Majors
-                  </label> 
-                  <label for="biomedical" onclick="uncheckAllMajors()"> 
-                      <input type="checkbox" id="biomedical" /> 
-                      Biomedical
-                  </label> 
-                  <label for="chemical" onclick="uncheckAllMajors()"> 
-                      <input type="checkbox" id="chemical" /> 
-                      Chemical
-                  </label> 
-                  <label for="compsci" onclick="uncheckAllMajors()"> 
-                      <input type="checkbox" id="compsci" /> 
-                      Computer Science
-                  </label> 
-                  <label for="computer" onclick="uncheckAllMajors()"> 
-                      <input type="checkbox" id="computer" /> 
-                      Computer
-                  </label> 
-                  <label for="electrical" onclick="uncheckAllMajors()"> 
-                      <input type="checkbox" id="electrical" /> 
-                      Electrical
-                  </label> 
-                  <label for="mechanical" onclick="uncheckAllMajors()"> 
-                      <input type="checkbox" id="mechanical" /> 
-                      Mechanical
-                  </label> 
-              </div> 
-          </div> 
+            <div class="disciplines">
+              <div class="select-title">
+                <select>
+                  <option>Select Majors</option>
+                </select>
+                <div class="hide-title"></div>
+              </div>
+              <div id="disciplines">
+                <label for="all">
+                  <input type="checkbox" id="all" />
+                  All Majors
+                </label>
+                <label for="biomedical" onclick="uncheckAllMajors()">
+                  <input type="checkbox" id="biomedical" />
+                  Biomedical
+                </label>
+                <label for="chemical" onclick="uncheckAllMajors()">
+                  <input type="checkbox" id="chemical" />
+                  Chemical
+                </label>
+                <label for="compsci" onclick="uncheckAllMajors()">
+                  <input type="checkbox" id="compsci" />
+                  Computer Science
+                </label>
+                <label for="computer" onclick="uncheckAllMajors()">
+                  <input type="checkbox" id="computer" />
+                  Computer
+                </label>
+                <label for="electrical" onclick="uncheckAllMajors()">
+                  <input type="checkbox" id="electrical" />
+                  Electrical
+                </label>
+                <label for="mechanical" onclick="uncheckAllMajors()">
+                  <input type="checkbox" id="mechanical" />
+                  Mechanical
+                </label>
+              </div>
+            </div>
 
-          <!-- Sort Order -->
-          <select name="sort" id="sort">
-            <option value="ascending">Ascending</option>
-            <option value="descending">Descending</option>
-          </select>
-          <br>
-          <p class="dropdown-title">Select desired field and optional value</p>
-          <ul id="criterion">
-            <li>
-              <select name="column" class="column-0"></select>
-              <input class="input-0" type="text">
-            </li>
-          </ul>
+            <!-- Sort Order -->
+            <select name="sort" id="sort">
+              <option value="ascending">Ascending</option>
+              <option value="descending">Descending</option>
+            </select>
+            <br />
+            <br />
+            <p class="dropdown-title">
+              Select desired field and optional value
+            </p>
+            <ul id="criterion">
+              <li>
+                <select name="column" class="column-0"></select>
+                <input class="input-0" type="text" />
+              </li>
+            </ul>
           </form>
         </div>
-        <br/><br/>
+        <br /><br />
       </div>
     </div>
 
     <!-- Footer -->
     <footer id="main-footer">
       <div class="footer-content container">
-        <p>Created by Netta Paulson, Shekinah Veeravalli, Bryan Hilldrup, and Asish Boyapati</p>
+        <p>
+          Created by Netta Paulson, Shekinah Veeravalli, Bryan Hilldrup, and
+          Asish Boyapati
+        </p>
         <p>Copyright &copy; 2020</p>
       </div>
     </footer>
@@ -134,6 +166,5 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <!-- Add column criteria function -->
     <script src="js/front_end/reportWriter.js"></script>
-</body>
-
+  </body>
 </html>

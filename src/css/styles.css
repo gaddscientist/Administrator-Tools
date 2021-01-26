@@ -3,6 +3,16 @@
   padding: 0;
 }
 
+.card {
+  border-radius: 12px;
+  background: #666;
+  /* box-shadow: 0 2px 24px 8px rgba(0, 0, 0, 1); */
+  box-shadow: 0 2px 24px 8px rgba(0, 0, 0, 0.26);
+  padding: 1rem;
+  margin: 2rem auto;
+  max-width: 60rem;
+}
+
 .title {
   font-size: 3rem;
   text-align: center;
@@ -56,7 +66,7 @@ input {
   width: 7rem;
 }
 
-input[type="file"]::-webkit-file-upload-button {
+input[type='file']::-webkit-file-upload-button {
   border: 2px solid black;
   padding: 0.8em 0.8em;
   background-color: #ffbc00;
@@ -75,13 +85,14 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   line-height: 1.6;
   background: #d3d3d3;
   height: 100vh;
   display: flex;
   flex-direction: column;
+  color: black;
 }
 
 a {
@@ -103,7 +114,7 @@ ul {
 
 #header-home {
   background: linear-gradient(rgba(20, 20, 20, 0.6), rgba(20, 20, 20, 0.6)),
-    url("../img/VCUEng.jpg") no-repeat center right/cover;
+    url('../img/VCUEng.jpg') no-repeat center right/cover;
   height: 100vh;
   color: #fff;
 }
@@ -159,7 +170,7 @@ ul {
   height: 5rem;
   width: 100%;
   left: 0;
-  flex-shrink: 0; 
+  flex-shrink: 0;
 }
 #main-footer .footer-content {
   display: flex;
@@ -181,46 +192,54 @@ ul {
   flex: 1 0 auto;
 }
 
+li {
+  margin: 0.5rem;
+}
+li input {
+  margin-left: 0.5rem;
+  width: 18rem;
+}
+
 /* Majors Dropdown Styles */
-.disciplines { 
-  width: 150px; 
+.disciplines {
+  width: 150px;
   background-color: #eff0f1;
   display: inline-block;
-} 
+}
 
-.select-title { 
-  position: relative; 
-} 
+.select-title {
+  position: relative;
+}
 
-.select-title select { 
-  width: 100%; 
-} 
+.select-title select {
+  width: 100%;
+}
 
-.hide-title { 
-  position: absolute; 
-  left: 0; 
-  right: 0; 
-  top: 0; 
-  bottom: 0; 
-} 
+.hide-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
 
-#disciplines { 
-  display: none; 
+#disciplines {
+  display: none;
   text-align: left;
   position: absolute;
-} 
+}
 
-#disciplines label { 
-  display: block; 
+#disciplines label {
+  display: block;
   background-color: #eff0f1;
   margin-bottom: 0;
   padding-bottom: 5px;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   font-weight: 400;
-} 
+}
 
-#disciplines label:hover { 
-  background-color: #2596be; 
+#disciplines label:hover {
+  background-color: #2596be;
   color: white;
-} 
+}
