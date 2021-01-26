@@ -1,6 +1,6 @@
-const express = require("express");
-const path = require("path");
-const db = require("./projects_db");
+const express = require('express');
+const path = require('path');
+const db = require('./projects_db');
 const app = express();
 
 // Parses data sent from front end
@@ -8,13 +8,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Handles POST requests to built report
-app.post("/filter.html", async function (req, res) {
+app.post('/filter.html', async function (req, res) {
   // Gets chosen criteria into local variable
   const columns = Array.from(req.body.columns);
   const majors = req.body.majors;
+  const multi = req.body.multi;
 
   // Queries database with selected columns
-  const rows = await db.query(columns, majors);
+  const rows = await db.query(columns, majors, multi);
 
   // Logs to terminal
   console.log(rows);
@@ -24,7 +25,7 @@ app.post("/filter.html", async function (req, res) {
 });
 
 // src folder is two folders above server.js file
-const rootDir = path.join(__dirname, "..", "..");
+const rootDir = path.join(__dirname, '..', '..');
 
 // Default handler
 app.use(express.static(rootDir), function (req, res, next) {
@@ -32,8 +33,8 @@ app.use(express.static(rootDir), function (req, res, next) {
   return next();
 });
 
-process.on("SIGINT", function () {
-  console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
+process.on('SIGINT', function () {
+  console.log('\nGracefully shutting down from SIGINT (Ctrl-C)');
   // some other closing procedures go here
   process.exit();
 });
@@ -41,4 +42,4 @@ process.on("SIGINT", function () {
 // Listen for any incoming requests
 app.listen(5000);
 
-console.log("Node.js web server at port 5000 is running..");
+console.log('Node.js web server at port 5000 is running..');

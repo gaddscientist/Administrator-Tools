@@ -1,27 +1,28 @@
 columns = {
-  Project_Number: "Project Number",
-  Project_Name: "Project Name",
-  Client_Name: "Client Name",
-  Instructor_1_Name: "Instructor Name",
-  Instructor_1_Email: "Instructor Email",
-  Student_1_Name: "First Student - Name",
-  Student_1_Email: "First Student - Email",
-  Student_2_Name: "Second Student - Name",
-  Student_2_Email: "Second Student - Name",
-  Student_3_Name: "Third Student - Name",
-  Student_3_Email: "Third Student - Name",
-  Student_4_Name: "Fourth Student - Name",
-  Student_4_Email: "Fourth Student - Name",
+  Project_Number: 'Project Number',
+  Project_Name: 'Project Name',
+  Project_Categories: 'Project Disciplines',
+  Client_Name: 'Client Name',
+  Instructor_1_Name: 'Instructor Name',
+  Instructor_1_Email: 'Instructor Email',
+  Student_1_Name: 'First Student - Name',
+  Student_1_Email: 'First Student - Email',
+  Student_2_Name: 'Second Student - Name',
+  Student_2_Email: 'Second Student - Name',
+  Student_3_Name: 'Third Student - Name',
+  Student_3_Email: 'Third Student - Name',
+  Student_4_Name: 'Fourth Student - Name',
+  Student_4_Email: 'Fourth Student - Name',
 };
 
 disciplines = {
-  "all": "All Majors",
-  "biomedical": "Biomedical",
-  "chemical": "Chemical",
-  "compsci": "Computer Science",
-  "computer": "Computer",
-  "electrical": "Electrical",
-  "mechanical": "Mechanical",
+  all: 'All Majors',
+  biomedical: 'Biomedical',
+  chemical: 'Chemical',
+  compsci: 'Computer Science',
+  computer: 'Computer',
+  electrical: 'Electrical',
+  mechanical: 'Mechanical',
 };
 
 // const columns = [
@@ -139,7 +140,7 @@ disciplines = {
 // ];
 
 let column_id = 0;
-let sortOrder = "ascending";
+let sortOrder = 'ascending';
 
 // Adds selection criteria to drop down selector
 function populateCriteriaDropDown(colID) {
@@ -147,10 +148,10 @@ function populateCriteriaDropDown(colID) {
   for (const column in columns) {
     // Creates option elements from given list of columns
     const dropdown = document.querySelector(`.column-${colID}`);
-    const item = document.createElement("option");
+    const item = document.createElement('option');
     item.textContent = columns[column];
     item.value = columns[column];
-    item.setAttribute("criteria", column);
+    item.setAttribute('criteria', column);
     dropdown.appendChild(item);
   }
 }
@@ -158,38 +159,37 @@ function populateCriteriaDropDown(colID) {
 let show = false;
 // Adds disciplines to drop down selector
 function populateDisciplineDropDown() {
-  const checkboxes = document.getElementById("disciplines");
+  const checkboxes = document.getElementById('disciplines');
 
-    if (show) {
-        checkboxes.style.display = "block";
-        // checkboxes.style.position = "absolute";
-        show = false;
-    } else {
-        checkboxes.style.display = "none";
-        show = true;
-    }
+  if (show) {
+    checkboxes.style.display = 'block';
+    // checkboxes.style.position = "absolute";
+    show = false;
+  } else {
+    checkboxes.style.display = 'none';
+    show = true;
+  }
 }
 
 // Toggles all check boxes when All Majors is selected
 function toggleAllMajors() {
-  const allMajors = document.getElementById("all");
-  const checkboxes = document.querySelectorAll("input[type=checkbox]");
-  if(allMajors.checked === true) {
+  const allMajors = document.getElementById('all');
+  const checkboxes = document.querySelectorAll('input[type=checkbox]');
+  if (allMajors.checked === true) {
     checkboxes.forEach(checkbox => {
       checkbox.checked = true;
-    }); 
-  }
-  else {
+    });
+  } else {
     checkboxes.forEach(checkbox => {
       checkbox.checked = false;
-    }); 
+    });
   }
 }
 
 // Unchecks the 'All Majors' box if any other discipline is unchecked
 function uncheckAllMajors() {
-  const allMajors = document.getElementById("all");
-  if(allMajors.checked === true) {
+  const allMajors = document.getElementById('all');
+  if (allMajors.checked === true) {
     allMajors.checked = false;
   }
 }
@@ -206,15 +206,15 @@ function addColumn(e) {
   if (column_id < numCols) {
     column_id++;
 
-    const li = document.createElement("li");
+    const li = document.createElement('li');
 
     li.innerHTML = `
       <select name="column" class="column-${column_id}"></select>
     `;
-    document.getElementById("criterion").appendChild(li);
+    document.getElementById('criterion').appendChild(li);
     populateCriteriaDropDown(column_id);
   } else {
-    alert("Can not select more columns than exist in database");
+    alert('Can not select more columns than exist in database');
   }
   e.preventDefault();
 }
@@ -224,10 +224,10 @@ function delColumn(e) {
   if (column_id > 0) {
     column_id--;
     document
-      .getElementById("criterion")
-      .removeChild(document.getElementById("criterion").lastChild);
+      .getElementById('criterion')
+      .removeChild(document.getElementById('criterion').lastChild);
   } else {
-    alert("Can not remove last item");
+    alert('Can not remove last item');
   }
 
   e.preventDefault();
@@ -239,44 +239,48 @@ function getCriteria() {
   const chosenCriteria = {
     columns: [],
     majors: [],
+    multi: '',
   };
 
   // Gets all desired columns
-  const cols = document.querySelector("#criterion");
+  const cols = document.querySelector('#criterion');
   // li's as an array
   selectionArr = Array.from(cols.children);
   // Iterate over each li
-  selectionArr.forEach((li) => {
+  selectionArr.forEach(li => {
     // Each "selection" element within the li
     const item = li.children[0];
     // Adds chosen option to array of chosen criteria
     chosenCriteria.columns.push(
-      item.options[item.selectedIndex].getAttribute("criteria")
+      item.options[item.selectedIndex].getAttribute('criteria')
     );
   });
 
   // Adds selected majors to chosen criteria payload
   const chosenMajors = [];
-  for(const discipline in disciplines) {
-        const checkbox = document.getElementById(discipline);
-        if(checkbox.checked === true) {
-          // console.log(discipline);
-          chosenMajors.push(disciplines[discipline]);
-        }
-  };
+  for (const discipline in disciplines) {
+    const checkbox = document.getElementById(discipline);
+    if (checkbox.checked === true) {
+      // console.log(discipline);
+      chosenMajors.push(disciplines[discipline]);
+    }
+  }
   chosenCriteria.majors = chosenMajors;
 
+  // Gets multi-discipline inclusion choice
+  chosenCriteria.multi = document.getElementById('multis').value;
+
   // Reverses array if sort is set to descending
-  if (document.getElementById("sort").value === "descending") {
-    sortOrder = "descending";
+  if (document.getElementById('sort').value === 'descending') {
+    sortOrder = 'descending';
   }
 
   return chosenCriteria;
 }
 
 // Submits POST request to server
-const sendPost = async (event) => {
-  const url = "/filter.html";
+const sendPost = async event => {
+  const url = '/filter.html';
   const data = getCriteria();
 
   event.preventDefault();
@@ -285,17 +289,17 @@ const sendPost = async (event) => {
     const response = await axios.post(url, data);
     // const rows = Array.from(response.data);
     // rows.forEach(row => console.log(row));
-    if (sortOrder === "ascending") {
+    if (sortOrder === 'ascending') {
       console.log(response.data);
       localStorage.setItem('data', JSON.stringify(response.data));
     } else {
       response.data.reverse();
       console.log(response.data.reverse());
       localStorage.setItem('data', JSON.stringify(response.data.reverse()));
-      document.getElementById("sort").value = "ascending";
-      sortOrder = "ascending";
+      document.getElementById('sort').value = 'ascending';
+      sortOrder = 'ascending';
     }
-    window.location.href="output.html";
+    window.location.href = 'output.html';
   } catch (e) {
     console.log(e);
   }
@@ -304,14 +308,12 @@ const sendPost = async (event) => {
   // window.location.reload();
 };
 
-
-
 let mouseTimeOut;
 // Hides dropdown on mouse leave
 function hideDropDown() {
-  const checkboxes = document.getElementById("disciplines");
+  const checkboxes = document.getElementById('disciplines');
   mouseTimeOut = setTimeout(() => {
-    checkboxes.style.display = "none";
+    checkboxes.style.display = 'none';
     show = true;
   }, 1000);
 }
@@ -322,18 +324,24 @@ function keepDropDown() {
 }
 
 // Event listener for Add Column button to call addColumn()
-document.querySelector(".add-column").addEventListener("click", addColumn);
+document.querySelector('.add-column').addEventListener('click', addColumn);
 // Event listener for Delete Column button to call delColumn()
-document.querySelector(".del-column").addEventListener("click", delColumn);
+document.querySelector('.del-column').addEventListener('click', delColumn);
 // Event listener for create button to generate report
-document.querySelector(".create-report").addEventListener("click", sendPost);
+document.querySelector('.create-report').addEventListener('click', sendPost);
 // Event listener for Disciplines drop down
-document.querySelector(".select-title").addEventListener("click", populateDisciplineDropDown);
+document
+  .querySelector('.select-title')
+  .addEventListener('click', populateDisciplineDropDown);
 // Event listener for All Majors checkbox
-document.querySelector("#all").addEventListener("change", toggleAllMajors);
+document.querySelector('#all').addEventListener('change', toggleAllMajors);
 // Event listeners to hide/show the discipline's dropdown
-document.querySelector(".disciplines").addEventListener('mouseleave', hideDropDown);
-document.querySelector(".disciplines").addEventListener('mouseover', keepDropDown);
+document
+  .querySelector('.disciplines')
+  .addEventListener('mouseleave', hideDropDown);
+document
+  .querySelector('.disciplines')
+  .addEventListener('mouseover', keepDropDown);
 
 // Populates initial drop down menu
 populateDropDowns(column_id);

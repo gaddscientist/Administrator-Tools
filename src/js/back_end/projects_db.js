@@ -1,29 +1,29 @@
-const mysql = require("mysql");
+const mysql = require('mysql');
 
 // Connection details
 const connection = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "capstone330",
-  database: "projects",
+  host: 'localhost',
+  user: 'root',
+  password: 'capstone330',
+  database: 'projects',
 });
 
 // Connect to database
 connection.connect(function (err, columns) {
   if (err) {
-    console.error("error connecting: " + err.stack);
+    console.error('error connecting: ' + err.stack);
     return;
   }
 });
 
 // External function to be called from server.js
-async function query(cols, majors) {
+async function query(cols, majors, multi) {
   // Creates parameterized query string
-  const query = buildQueryString(cols, majors);
+  const query = buildQueryString(cols, majors, multi);
 
   let data = cols;
   // Adds each selected major to the list of parameters for query unless all majors are requested
-  if(!majors.includes("All Majors")) {
+  if (!majors.includes('All Majors')) {
     majors.forEach(major => {
       data.push('%' + major + '%');
     });
@@ -36,40 +36,53 @@ async function query(cols, majors) {
 }
 
 // Creates SQL query statement to be executed
-function buildQueryString(cols, majors) {
-  let query = "SELECT ";
+function buildQueryString(cols, majors, multi) {
+  let query = 'SELECT ';
 
   // Adds one placeholder for each specified column
   cols.forEach(() => {
-    query += "??, ";
+    query += '??, ';
   });
 
   // Removes trailing ', ' from last placeholder
   query = query.slice(0, -2);
 
   // Database table selection
-  query += " From `projects`";
+  query += ' From `projects`';
 
   // Continues query if majors are specified
-  if (majors.includes("All Majors")) {
+  if (majors.includes('All Majors')) {
     return query;
   } else {
-    query += " WHERE "
+    query += ' WHERE ';
   }
 
   // Adds one placeholder for each specified major
   majors.forEach((major, index) => {
-    query += "`Project_Categories` LIKE ?"
-    if(index < majors.length - 1) {
-      query += " OR ";
+    query += '`Project_Categories` LIKE ?';
+    if (index < majors.length - 1 && multi === 'only') {
+      console.log('HERE');
+      query += ' AND ';
+    } else if (index < majors.length - 1) {
+      query += ' OR ';
     }
   });
 
   // Checks to see if user wants Computer Engineering results but not Computer Science results
-  if(majors.includes("Computer") && !majors.includes("Computer Science")) {
+  if (majors.includes('Computer') && !majors.includes('Computer Science')) {
     query += " AND `Project_Categories` NOT LIKE '%Computer Science%'";
   }
 
+  // Filters results based on multidisciplinary preference
+  if (multi === 'exclude') {
+    // Filter out multidsciplinary results
+    query += " AND `Project_Categories` NOT LIKE '%Multidisciplinary'";
+  } else if (multi === 'only') {
+    // Filter out non-multidsciplinary results
+    query += " AND `Project_Categories` LIKE '%Multidisciplinary'";
+  }
+
+  console.log(query);
   // Returns finished query
   return query;
 }
@@ -88,9 +101,9 @@ const executeQuery = (query, data) => {
 };
 
 // Handler to shut down database on interrupt
-process.on("SIGINT", function () {
-  console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
-  console.log("Closing database connection...");
+process.on('SIGINT', function () {
+  console.log('\nGracefully shutting down from SIGINT (Ctrl-C)');
+  console.log('Closing database connection...');
 
   connection.end(function (err) {
     if (err) {
