@@ -29,6 +29,8 @@ async function query(cols, majors, multi) {
       data.push('%' + major + '%');
     });
   }
+  console.log('data');
+  console.log(data);
 
   // Executes query string
   const queryArr = await executeQuery(query, data);
@@ -36,22 +38,48 @@ async function query(cols, majors, multi) {
   return queryArr;
 }
 
+// Appends column specifications to query string
 function appendSpecificationString(cols) {
+  // Gets rid of columns where no specification was included
   const columns = cols.filter(col => Object.values(col)[0] !== '');
+
   if (columns.length === 0) {
     return '';
   } else {
-    let userSpecification = ' ';
+    let userSpecification = '(';
     columns.forEach((col, index) => {
       const key = Object.keys(col)[0];
-      const value = Object.values(col)[0];
-      userSpecification += `${key} LIKE '%${value}%'`;
+      // Gets string representation of multiple specifications
+      const strValue = Object.values(col)[0];
+      // Splits specification string into array of specifications
+      const valuesArr = strValue.split(',').map(value => value.trim());
+
+      valuesArr.forEach((value, index) => {
+        userSpecification += `${key} LIKE '%${value}%'`;
+        if (index < valuesArr.length - 1) {
+          userSpecification += ' OR ';
+        }
+      });
+
       if (index < columns.length - 1) {
         userSpecification += ' AND ';
       }
     });
-
+    userSpecification += ')';
     return userSpecification;
+  }
+}
+
+function appendMultidisciplinary(multi) {
+  // Filters results based on multidisciplinary preference
+  if (multi === 'exclude') {
+    // Filter out multidsciplinary results
+    return " AND `Project_Categories` NOT LIKE '%Multidisciplinary%'";
+  } else if (multi === 'only') {
+    // Filter out non-multidsciplinary results
+    return " AND `Project_Categories` LIKE '%Multidisciplinary%'";
+  } else {
+    return '';
   }
 }
 
@@ -74,16 +102,19 @@ function buildQueryString(cols, majors, multi) {
 
   // Continues query if majors are specified
   if (majors.includes('All Majors') && specification === '') {
+    query += appendMultidisciplinary(multi);
+    console.log(query);
     return query;
   } else if (majors.includes('All Majors')) {
     query += ' WHERE ' + specification;
+    query += appendMultidisciplinary(multi);
+    console.log(query);
     return query;
   } else if (specification !== '') {
-    query += specification + ' AND (';
+    query += ' WHERE ' + specification + ' AND (';
   } else {
     query += ' WHERE ';
   }
-
   // Adds one placeholder for each specified major
   majors.forEach((major, index) => {
     query += '`Project_Categories` LIKE ?';
@@ -99,18 +130,11 @@ function buildQueryString(cols, majors, multi) {
     query += " AND `Project_Categories` NOT LIKE '%Computer Science%'";
   }
 
-  // Filters results based on multidisciplinary preference
-  if (multi === 'exclude') {
-    // Filter out multidsciplinary results
-    query += " AND `Project_Categories` NOT LIKE '%Multidisciplinary'";
-  } else if (multi === 'only') {
-    // Filter out non-multidsciplinary results
-    query += " AND `Project_Categories` LIKE '%Multidisciplinary'";
-  }
-
   if (specification !== '') {
     query += ')';
   }
+
+  query += appendMultidisciplinary(multi);
 
   console.log(query);
   // Returns finished query

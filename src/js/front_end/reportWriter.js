@@ -288,6 +288,10 @@ function resetForm() {
   Array.from(document.querySelectorAll('input[type=checkbox]')).forEach(
     el => (el.checked = false)
   );
+
+  Array.from(document.querySelectorAll('select + input')).forEach(
+    el => (el.value = '')
+  );
 }
 
 // Submits POST request to server
