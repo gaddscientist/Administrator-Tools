@@ -281,12 +281,26 @@ function getCriteria() {
   return chosenCriteria;
 }
 
+function resetForm() {
+  document.getElementById('multis').value = 'include';
+  document.getElementById('sort').value = 'ascending';
+  sortOrder = 'ascending';
+  Array.from(document.querySelectorAll('input[type=checkbox]')).forEach(
+    el => (el.checked = false)
+  );
+}
+
 // Submits POST request to server
 const sendPost = async event => {
   const url = '/filter.html';
   const data = getCriteria();
 
   event.preventDefault();
+  if (data.majors.length === 0) {
+    alert('Please choose at least one engineering discipline');
+    return;
+  }
+  resetForm();
 
   try {
     const response = await axios.post(url, data);
@@ -299,8 +313,6 @@ const sendPost = async event => {
       response.data.reverse();
       console.log(response.data.reverse());
       localStorage.setItem('data', JSON.stringify(response.data.reverse()));
-      document.getElementById('sort').value = 'ascending';
-      sortOrder = 'ascending';
     }
     window.location.href = 'output.html';
   } catch (e) {

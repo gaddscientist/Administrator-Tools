@@ -23,8 +23,6 @@ async function query(cols, majors, multi) {
 
   let data = [];
   cols.forEach(col => data.push(Object.keys(col)[0]));
-  console.log('data');
-  console.log(data);
   // Adds each selected major to the list of parameters for query unless all majors are requested
   if (!majors.includes('All Majors')) {
     majors.forEach(major => {
@@ -79,13 +77,12 @@ function buildQueryString(cols, majors, multi) {
     return query;
   } else if (majors.includes('All Majors')) {
     query += ' WHERE ' + specification;
-    console.log(query);
     return query;
+  } else if (specification !== '') {
+    query += specification + ' AND (';
   } else {
     query += ' WHERE ';
   }
-
-  query += specification + ' AND (';
 
   // Adds one placeholder for each specified major
   majors.forEach((major, index) => {
@@ -111,7 +108,10 @@ function buildQueryString(cols, majors, multi) {
     query += " AND `Project_Categories` LIKE '%Multidisciplinary'";
   }
 
-  query += ')';
+  if (specification !== '') {
+    query += ')';
+  }
+
   console.log(query);
   // Returns finished query
   return query;
