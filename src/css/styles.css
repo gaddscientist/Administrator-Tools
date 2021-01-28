@@ -49,6 +49,12 @@
   margin-left: 3rem;
 }
 
+.btn-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+
 .filter-select {
   padding-bottom: 4rem;
 }
@@ -205,6 +211,7 @@ li input {
   width: 150px;
   background-color: #eff0f1;
   display: inline-block;
+  border-radius: 6px;
 }
 
 .select-title {
