@@ -218,6 +218,13 @@ li input {
   position: relative;
 }
 
+select {
+  height: 32px;
+}
+input[type='text'] {
+  height: 32px;
+}
+
 .select-title select {
   width: 100%;
 }
