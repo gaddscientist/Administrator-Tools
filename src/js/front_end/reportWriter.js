@@ -304,7 +304,6 @@ const sendPost = async event => {
     alert('Please choose at least one engineering discipline');
     return;
   }
-  resetForm();
 
   try {
     const response = await axios.post(url, data);
@@ -322,6 +321,7 @@ const sendPost = async event => {
   } catch (e) {
     console.log(e);
   }
+  resetForm();
 
   // Refreshes page after sending data
   // window.location.reload();
