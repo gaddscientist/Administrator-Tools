@@ -5,8 +5,6 @@ ini_set('display_errors', 1);
 
 $servername = "localhost";
 $username = "root";
-$password = "capstone330";
-$database = "projects";
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);

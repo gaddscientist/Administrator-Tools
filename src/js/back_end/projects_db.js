@@ -4,8 +4,6 @@ const mysql = require('mysql');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'capstone330',
-  database: 'projects',
 });
 
 // Connect to database
